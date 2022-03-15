@@ -10,19 +10,24 @@ namespace EventiaWebapp.Controllers
             return View();
         }
 
-        public IActionResult Booked()
+        public IActionResult Events()
         {
             return View();
         }
 
-        public IActionResult Join(Guid id)
+        public IActionResult MyEvents()
+        {
+            return View();
+        }
+
+        public IActionResult JoinEvent(int id)
         {
             return View(id);
         }
 
-        public IActionResult Confirmation(Guid id)
+        public IActionResult LogIn()
         {
-            return View(id);
+            return View();
         }
     }
 }

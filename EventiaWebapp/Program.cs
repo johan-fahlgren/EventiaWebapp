@@ -1,5 +1,5 @@
 // DATABASE
-DataLayer.Backend.Admin.PredTestDatabase();
+DataLayer.Backend.Admin.PrepTestDatabase();
 
 
 //WEBAPP
@@ -19,19 +19,24 @@ var app = builder.Build();
 app.UseRouting();
 
 app.MapControllerRoute(
-    name: "overview",
-    pattern: $"events/confirmation/{id:int}",
-    defaults: new { controller = "Events", action = "Confirmation" });
+    name: "JoinEvent",
+    pattern: $"events/confirmation/",
+    defaults: new { controller = "EventsC", action = "JoinEvent" });
 
 app.MapControllerRoute(
-    name: "overview",
-    pattern: $"events/join/{id:int}",
-    defaults: new { controller = "Events", action = "Join" });
+    name: "Login",
+    pattern: $"events/LogIn/",
+    defaults: new { controller = "EventsC", action = "LogIn" });
 
 app.MapControllerRoute(
-    name: "booked",
+    name: "MyEvents",
     pattern: "events/booked",
-    defaults: new { controller = "Events", action = "Booked" });
+    defaults: new { controller = "EventsC", action = "MyEvents" });
+
+app.MapControllerRoute(
+    name: "Events",
+    pattern: "events/booked",
+    defaults: new { controller = "EventsC", action = "Events" });
 
 app.MapControllerRoute(
     name: "default",
@@ -41,6 +46,6 @@ app.MapRazorPages();
 
 //PHASE 3  - Server started
 app.Run();
-}
+
 
 

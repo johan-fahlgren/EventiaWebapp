@@ -1,4 +1,112 @@
-﻿@page
-@model EventiaWebapp.Pages.Shared._LayoutModel
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BirthdaysDotCom</title>
+</head>
+
+<body>
+<header>
+    <ul class="navbar">
+        <li><a
+                asp-controller="EventsC"
+                asp-action="Index">Home
+        </a></li>
+        <li><a
+                asp-controller="EventsC"
+                asp-action="Events">Events
+        </a></li>
+        <li><a
+                asp-controller="EventsC"
+                asp-action="MyEvents">My Events
+        </a></li>
+        <li><a
+                asp-controller="EventsC"
+                asp-action="LogIn">´Log In
+        </a></li>
+    </ul>
+</header>
+
+<main role="main">
+    @RenderBody()
+
+</main>
+
+<footer>
+    <p> Eventia&copy; </p>
+</footer>
+@RenderSection("Overview_style", required: false)
+@RenderSection("UpAndComing_Style", required: false)
+</body>
+
+</html>
+
+
+
+
+<style>
+
+    html {
+        background-color: floralwhite;
+        margin: 0;
+        padding: 0;
+       
+    }
+
+    body {
+        font-family: Cascadia Mono;
+        background-color: papayawhip;
+        height: 100vh;
+        width: 800px;
+        margin:auto;
+    }
+
+    main {
+        padding: 20px 40px;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    li {
+        font-size: 1.2rem;
+    }
+
+    .navbar {
+        margin: 0px;
+        padding: 20px;
+        background-color: bisque;
+        display: flex;
+        gap: 30px;
+    }
+
+    .navbar > li {
+        list-style: none;
+        font-size: 1.4rem;
+    }
+
+    .todays_date {
+        color: darkslategrey;
+        font-weight: bold;
+        font-size: 1.6rem;
+        background-color: bisque;
+        padding: 10px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0px;
+        width: 800px;
+        padding: 10px 0px;
+        background-color: bisque;
+    }
+
+    footer > p {
+        text-align: center;
+        margin: 0 40px;
+        font-size: 1.2rem;
+    }
+</style>
