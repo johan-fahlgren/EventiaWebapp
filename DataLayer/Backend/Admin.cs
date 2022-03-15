@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataLayer.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Backend
 {
@@ -12,13 +13,15 @@ namespace DataLayer.Backend
             this._options = options;
         }
 
-        public static void PredTestDatabase()
+        public static void PrepTestDatabase()
         {
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer(
                 @"server=(localdb)\MSSQLLocalDB;database=EF_Test_EventiaDb");
 
-            //var database = new Database(optionsBuilder.Options);
+            var database = new Database(optionsBuilder.Options);
+            database.RecreateDatabase();
+            database.SeedTestDataBase();
         }
 
     }
