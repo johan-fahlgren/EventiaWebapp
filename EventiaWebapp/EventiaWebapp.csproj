@@ -9,7 +9,10 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
-    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\eventia.jpg" />
   </ItemGroup>
 
   <ItemGroup>

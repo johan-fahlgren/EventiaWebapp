@@ -21,22 +21,22 @@ app.UseRouting();
 app.MapControllerRoute(
     name: "JoinEvent",
     pattern: $"events/confirmation/",
-    defaults: new { controller = "EventsC", action = "JoinEvent" });
+    defaults: new { controller = "Events", action = "JoinEvent" });
 
 app.MapControllerRoute(
     name: "Login",
-    pattern: $"events/LogIn/",
-    defaults: new { controller = "EventsC", action = "LogIn" });
+    pattern: $"events/login/",
+    defaults: new { controller = "Events", action = "LogIn" });
 
 app.MapControllerRoute(
     name: "MyEvents",
-    pattern: "events/booked",
-    defaults: new { controller = "EventsC", action = "MyEvents" });
+    pattern: "myevents/",
+    defaults: new { controller = "Events", action = "MyEvents" });
 
 app.MapControllerRoute(
-    name: "Events",
-    pattern: "events/booked",
-    defaults: new { controller = "EventsC", action = "Events" });
+    name: "UpComingEvents",
+    pattern: "events/",
+    defaults: new { controller = "Events", action = "UpComingEvents" });
 
 app.MapControllerRoute(
     name: "default",

@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventiaWebapp.Controllers
 {
-    public class EventsC : Controller
+    public class Events : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Events()
+        public IActionResult UpComingEvents()
         {
             return View();
         }
