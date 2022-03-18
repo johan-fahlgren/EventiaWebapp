@@ -5,7 +5,7 @@ namespace EventiaWebapp.Models
     public class Attendee
     {
 
-        public Guid Id { get; set; }
+        public int AttendeeId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -13,7 +13,7 @@ namespace EventiaWebapp.Models
         [Required]
         public string Phone_Number { get; set; }
 
-        public ICollection<Event> Event { get; set; }
+        public ICollection<AttendeeEvent> AttendeeEvents { get; set; }
 
     }
 }

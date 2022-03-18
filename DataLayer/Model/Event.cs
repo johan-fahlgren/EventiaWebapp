@@ -5,7 +5,7 @@ namespace EventiaWebapp.Models
     public class Event
     {
 
-        public Guid Id { get; set; }
+        public int EventId { get; set; }
         [Required]
         public string Titel { get; set; }
         [Required]
@@ -20,6 +20,8 @@ namespace EventiaWebapp.Models
         public DateTime Date { get; set; }
         [Required]
         public int Spots_Available { get; set; }
+
+        public ICollection<AttendeeEvent> AttendeeEvents { get; set; }
 
 
 

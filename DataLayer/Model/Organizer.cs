@@ -4,7 +4,7 @@ namespace EventiaWebapp.Models
 {
     public class Organizer
     {
-        public Guid Id { get; set; }
+        public int OrganizerId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
