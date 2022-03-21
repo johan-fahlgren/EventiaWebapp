@@ -9,7 +9,7 @@ namespace EventiaWebapp.Models
         [Required]
         public string Titel { get; set; }
         [Required]
-        public int Organizer_Id { get; set; }
+        public Organizer Organizer { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

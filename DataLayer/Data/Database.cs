@@ -1,31 +1,44 @@
 ﻿using EventiaWebapp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Data
 {
     public class Database
     {
-        private readonly DbContextOptions _options;
+        private readonly EventiaDbContext _context;
 
-        public Database(DbContextOptions options)
+        public Database(EventiaDbContext context)
         {
-            this._options = options;
+            this._context = context;
         }
 
 
-        public void RecreateDatabase()
+        public async Task RecreateDatabase()
         {
-            using var ctx = new EventiaDbContext(_options);
-
-            ctx.Database.EnsureDeleted();
-            ctx.Database.EnsureCreated();
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
 
         }
 
-        public void SeedTestDataBase()
+        public async Task CreateDatabaseIfNotExists()
         {
-            using var ctx = new EventiaDbContext(_options);
+            await _context.Database.EnsureCreatedAsync();
+        }
 
+        public async Task CreateAndSeedIfDatabaseDontExists()
+        {
+            bool didCreateDatabase =
+                await _context.Database.EnsureCreatedAsync();
+            if (didCreateDatabase)
+            {
+                await SeedTestDataBase();
+            }
+        }
+
+
+
+
+        public async Task SeedTestDataBase()
+        {
 
             var organizers = new List<Organizer>
             {
@@ -35,7 +48,7 @@ namespace DataLayer.Data
 
             };
 
-            ctx.AddRange(organizers);
+            await _context.AddRangeAsync(organizers);
 
 
             var events = new List<Event>
@@ -43,7 +56,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Ghost",
-                    Organizer_Id = 1,
+                    Organizer = organizers[0],
                     Description =
                         "Ghost klassas idag som ett av världens mest älskade metalband!" +
                         " De är hyllade, prisbelönta och har alltid utmanat och skapat rubriker." +
@@ -58,7 +71,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "TOOL",
-                    Organizer_Id = 1,
+                    Organizer = organizers[0],
                     Description =
                         "TOOL TILLBAKA TILL SVERIGE FÖR FÖRSTA GÅNGEN PÅ FEMTON ÅR!" +
                         "Femton år har gått sedan bandet senast spelade på svensk mark" +
@@ -76,7 +89,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Frida Hyvönen",
-                    Organizer_Id = 2,
+                    Organizer = organizers[1],
                     Description =
                         "Med det senaste vida hyllade albumet ”Dream of Independence” i ryggen ger" +
                         " sig Frida Hyvönen ut på en omfattande vårturné som inleds 25 februari i Luleå." +
@@ -91,7 +104,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Humorkväll med Jonathan Unge & Ahmed Berhan",
-                    Organizer_Id = 2,
+                    Organizer = organizers[1],
                     Description =
                         "Nu blir det humor på hög nivå inne på salongen på Kungsbacka Teater." +
                         "Jonatan Unge är den anemiska kulturpojken från Djurgården som trots reumatism" +
@@ -106,7 +119,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Alla känner Ankan",
-                    Organizer_Id = 3,
+                    Organizer = organizers[2],
                     Description =
                         "Med det senaste vida hyllade albumet ”Dream of Independence” i ryggen ger" +
                         " sig Frida Hyvönen ut på en omfattande vårturné som inleds 25 februari i Luleå." +
@@ -121,7 +134,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "En afton på Operan",
-                    Organizer_Id = 3,
+                    Organizer = organizers[2],
                     Description =
                         "Var med och hör framtidens operasångare i början av sin karriär," +
                         " på väg ut i den internationella operavärlden. Tillsammans med dirigent" +
@@ -135,29 +148,35 @@ namespace DataLayer.Data
                 }
             };
 
-            ctx.AddRange(events);
+            await _context.AddRangeAsync(events);
+
+            //EventLists
+            var johansEvents = new List<Event> { events[1], events[2] };
+            var piasEvents = new List<Event> { events[3], events[0] };
+            var annaMartasEvents = new List<Event> { events[0], events[5] };
+
 
             var attendees = new List<Attendee>
             {
                 new()
                 {
                     Name = "Johan", Email = "Johan@mail.com",
-                    Phone_Number = "076-1234567", Events = events,
+                    Phone_Number = "076-1234567", Events = johansEvents,
             },
                 new ()
                 {
                     Name = "Pia", Email = "pia@mail.com",
-                    Phone_Number = "070-1234567"
+                    Phone_Number = "070-1234567", Events = piasEvents,
                 },
                 new ()
                 {
                     Name = "AnnaMärta", Email = "AnnaMärta@mail.com",
-                    Phone_Number = "073-1234567"
+                    Phone_Number = "073-1234567", Events = annaMartasEvents
                 }
             };
 
-            ctx.AddRange(attendees);
-            ctx.SaveChanges();
+            await _context.AddRangeAsync(attendees);
+            await _context.SaveChangesAsync();
 
         }
 

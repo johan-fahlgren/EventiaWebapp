@@ -1,28 +1,32 @@
 ﻿using DataLayer.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Backend
 {
     public class Admin
     {
+        private readonly Database _database;
 
-        private readonly DbContextOptions _options;
-
-        public Admin(DbContextOptions options)
+        public Admin(Database database)
         {
-            this._options = options;
+            this._database = database;
         }
 
-        public void PrepTestDatabase()
+        public async Task CreateDatabase()
         {
-            var optionsBuilder = new DbContextOptionsBuilder();
-            optionsBuilder.UseSqlServer(
-                @"server=(localdb)\MSSQLLocalDB;database=EF_Test_EventiaDb");
-
-            var database = new Database(optionsBuilder.Options);
-            database.RecreateDatabase();
-            database.SeedTestDataBase();
+            await _database.CreateDatabaseIfNotExists();
         }
+
+        public async Task RecreateAndSeedTestDatabase()
+        {
+            await _database.RecreateDatabase();
+            await _database.SeedTestDataBase();
+        }
+
+        public async Task createDatabaseIfNotExists()
+        {
+            await _database.CreateAndSeedIfDatabaseDontExists();
+        }
+
 
     }
 }

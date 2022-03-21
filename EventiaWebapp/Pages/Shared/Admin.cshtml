@@ -1,0 +1,18 @@
+﻿@page
+@model EventiaWebapp.Pages.Shared.AdminModel
+@{
+}
+
+<form method="post">
+    
+    @if (HttpContext.Request.Method == "GET")
+    {
+        <h5>Do you want to reset database</h5>
+    }
+    else
+    {
+        <h5>Database recreated</h5>
+    }
+    <button type="submit">Reset</button>
+
+</form>

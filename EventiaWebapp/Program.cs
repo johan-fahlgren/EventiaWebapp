@@ -1,6 +1,7 @@
 using DataLayer.Backend;
 using DataLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using EventHandler = EventiaWebapp.Services.EventHandler;
 
 //WEBAPP
 
@@ -11,13 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<Admin>();
+builder.Services.AddScoped<Database>();
 
 //Add EnventHandler ass service
 builder.Services.AddScoped<EventHandler>();
 
 //Add database as service
 builder.Services.AddDbContext<EventiaDbContext>(options =>
-     options.UseSqlServer("DefaultConnection"));
+     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Add Debugging
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -58,10 +60,25 @@ app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
-    //Initiate database
-    var admin = scope.ServiceProvider.GetService<Admin>();
-    admin.PrepTestDatabase();
 
+    var admin = scope.ServiceProvider.GetService<Admin>();
+    //Initiate database
+    if (app.Environment.IsProduction())
+    {
+        await admin.CreateDatabase();
+    }
+
+    if (app.Environment.IsDevelopment())
+    {
+        await admin.createDatabaseIfNotExists();
+    }
+
+
+
+    var eventHandler = scope.ServiceProvider.GetService<EventHandler>();
+    //eventHandler.UserEventsList(1);
+    //eventHandler.GetEvents();
+    //eventHandler.GetAttendee(1);
 
     var ctx =
         scope.ServiceProvider.GetRequiredService<EventiaDbContext>();

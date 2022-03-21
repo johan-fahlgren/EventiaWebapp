@@ -13,52 +13,69 @@ namespace EventiaWebapp.Services
 
         public EventHandler(EventiaDbContext context)
         {
-
             _context = context;
-            UserEventsList(1);
-
         }
 
-        //TODO(✓)  - En metod som retunerar en lista på alla events.
+        //TODO(✓)  - A method that returns a list of all events.
         public List<Event> GetEvents()
         {
-            var query = _context.Events
+            var eventList = _context.Events
                 .ToList();
 
-            return query;
+            return eventList;
 
         }
 
 
-        //TODO(✓)  - En metod som retunerar ett default deltagarobjekt (alltid samma i denna uppgift).
+        //TODO(✓)  - A method that returns a default Attendee object (always the same object for exercise).
         public Attendee GetAttendee(int userId)
         {
-            var query = _context.Attendees
+
+            var attendee = _context.Attendees
                 .FirstOrDefault(a => a.AttendeeId == userId);
 
-            return query;
+            if (attendee == null)
+            {
+                return null;
+            }
+
+            return attendee;
         }
 
 
-        //TODO()  - En metod som retunerar ett givet deltagarobjekt med ett givet eventobjekt.
+        //TODO(✓)  - A method that adds a event object to a attendee object.
+        public void AddEventToAttendee(int userId, int eventId)
+        {
+
+            var attendee = _context.Attendees
+                .Include(a => a.Events)
+                .FirstOrDefault(a => a.AttendeeId == userId);
+
+            var eventQuery = _context.Events
+                .FirstOrDefault(e => e.EventId == eventId);
 
 
+            attendee.Events.Add(eventQuery);
+            _context.SaveChanges();
 
 
-        //TODO(✓)  - En metod som retunerar en lista på alla events som ett givet deltagarobjekt deltar i. 
-        public List<Attendee> UserEventsList(int userId)
+        }
+
+
+        //TODO(✓)  - A method that returns a list of all events for one Attendee object. 
+        public List<Event> UserEventsList(int userId)
         {
 
             userId = 1;
 
-            var query = _context.Attendees
-                .Where(a => a.AttendeeId == userId)
-                .Include(a => a.Events);
-
-            var eventList = query.ToList();
+            var attendee = _context.Attendees
+                .Include(a => a.Events)
+                .FirstOrDefault(a => a.AttendeeId == userId);
 
 
-            return eventList;
+            var eventList = attendee.Events;
+
+            return eventList.ToList();
         }
 
 

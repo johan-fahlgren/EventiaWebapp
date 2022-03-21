@@ -15,22 +15,6 @@ namespace DataLayer.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            /*
-            modelBuilder.Entity<AttendeeEvent>()
-                .HasKey(ae => new { ae.AttendeeId, ae.EventId });
-
-            modelBuilder.Entity<AttendeeEvent>()
-                .HasOne(ae => ae.Attendee)
-                .WithMany(e => e.AttendeeEvents)
-                .HasForeignKey(ae => ae.AttendeeId);
-
-            modelBuilder.Entity<AttendeeEvent>()
-                .HasOne(ae => ae.Event)
-                .WithMany(e => e.AttendeeEvents)
-                .HasForeignKey(ae => ae.EventId);
-                */
-
-
         }
 
 
