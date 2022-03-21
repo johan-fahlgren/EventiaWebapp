@@ -13,7 +13,7 @@ namespace DataLayer.Backend
             this._options = options;
         }
 
-        public static void PrepTestDatabase()
+        public void PrepTestDatabase()
         {
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer(

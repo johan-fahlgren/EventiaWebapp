@@ -53,7 +53,7 @@ namespace DataLayer.Data
                     Place = "Avicii Arena",
                     Address = "Globentorget 2, 12177 JOHANNESHOV",
                     Date = new DateTime(2022, 4, 29, 19, 00, 00),
-                    Spots_Available = 2000
+                    Spots_Available = 10000
                 },
                 new()
                 {
@@ -70,7 +70,7 @@ namespace DataLayer.Data
                     Place = "Avicii Arena",
                     Address = "Globentorget 2, 12177 JOHANNESHOV",
                     Date = new DateTime(2022, 4, 26, 20, 45, 00),
-                    Spots_Available = 2000
+                    Spots_Available = 10000
                 },
 
                 new()
@@ -86,7 +86,7 @@ namespace DataLayer.Data
                     Place = "Kungsbacka Teater",
                     Address = "Gymnasiegatan 42, 434 50 KUNGSBACKA",
                     Date = new DateTime(2022, 4, 2, 19, 00, 00),
-                    Spots_Available = 2000
+                    Spots_Available = 780
                 },
                 new()
                 {
@@ -101,7 +101,7 @@ namespace DataLayer.Data
                     Place = "Kungsbacka Teater",
                     Address = "Gymnasiegatan 42, 434 50 KUNGSBACKA",
                     Date = new DateTime(2022, 9, 9, 19, 30, 00),
-                    Spots_Available = 2000
+                    Spots_Available = 780
                 },
                 new()
                 {
@@ -116,7 +116,7 @@ namespace DataLayer.Data
                     Place = "Gävle Teater",
                     Address = "Teaterplan 1, 803 23 GÄVLE",
                     Date = new DateTime(2022, 10, 29, 19, 30, 00),
-                    Spots_Available = 2000
+                    Spots_Available = 900
                 },
                 new()
                 {
@@ -131,9 +131,9 @@ namespace DataLayer.Data
                     Place = "Gävle Teater",
                     Address = "Teaterplan 1, 803 23 GÄVLE",
                     Date = new DateTime(2022, 6, 11, 16, 00, 00),
-                    Spots_Available = 2000
+                    Spots_Available = 900
                 }
-    };
+            };
 
             ctx.AddRange(events);
 
@@ -142,14 +142,14 @@ namespace DataLayer.Data
                 new()
                 {
                     Name = "Johan", Email = "Johan@mail.com",
-                    Phone_Number = "076-1234567"
-                },
-                new()
+                    Phone_Number = "076-1234567", Events = events,
+            },
+                new ()
                 {
                     Name = "Pia", Email = "pia@mail.com",
                     Phone_Number = "070-1234567"
                 },
-                new()
+                new ()
                 {
                     Name = "AnnaMärta", Email = "AnnaMärta@mail.com",
                     Phone_Number = "073-1234567"

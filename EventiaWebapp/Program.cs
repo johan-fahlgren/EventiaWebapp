@@ -1,6 +1,6 @@
-// DATABASE
-DataLayer.Backend.Admin.PrepTestDatabase();
-
+using DataLayer.Backend;
+using DataLayer.Data;
+using Microsoft.EntityFrameworkCore;
 
 //WEBAPP
 
@@ -10,6 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<Admin>();
+
+//Add EnventHandler ass service
+builder.Services.AddScoped<EventHandler>();
+
+//Add database as service
+builder.Services.AddDbContext<EventiaDbContext>(options =>
+     options.UseSqlServer("DefaultConnection"));
+
+//Add Debugging
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
 //PHASE 2 - Middleware pipeline (Configure the HTTP request pipeline).
@@ -44,8 +55,22 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    //Initiate database
+    var admin = scope.ServiceProvider.GetService<Admin>();
+    admin.PrepTestDatabase();
+
+
+    var ctx =
+        scope.ServiceProvider.GetRequiredService<EventiaDbContext>();
+}
+
 //PHASE 3  - Server started
 app.Run();
+
+
 
 
 

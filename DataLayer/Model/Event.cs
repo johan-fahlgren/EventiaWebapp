@@ -21,7 +21,7 @@ namespace EventiaWebapp.Models
         [Required]
         public int Spots_Available { get; set; }
 
-        public ICollection<AttendeeEvent> AttendeeEvents { get; set; }
+        public ICollection<Attendee> Attendees { get; set; }
 
 
 

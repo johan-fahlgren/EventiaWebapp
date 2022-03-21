@@ -13,7 +13,7 @@ namespace EventiaWebapp.Models
         [Required]
         public string Phone_Number { get; set; }
 
-        public ICollection<AttendeeEvent> AttendeeEvents { get; set; }
+        public ICollection<Event> Events { get; set; }
 
     }
 }
