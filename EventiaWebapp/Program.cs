@@ -1,7 +1,8 @@
 using DataLayer.Backend;
 using DataLayer.Data;
+using EventiaWebapp.Services;
 using Microsoft.EntityFrameworkCore;
-using EventHandler = EventiaWebapp.Services.EventHandler;
+
 
 //WEBAPP
 
@@ -15,7 +16,7 @@ builder.Services.AddScoped<Admin>();
 builder.Services.AddScoped<Database>();
 
 //Add EnventHandler ass service
-builder.Services.AddScoped<EventHandler>();
+builder.Services.AddScoped<EventService>();
 
 //Add database as service
 builder.Services.AddDbContext<EventiaDbContext>(options =>
@@ -31,29 +32,24 @@ var app = builder.Build();
 
 app.UseRouting();
 
-app.MapControllerRoute(
+/*app.MapControllerRoute(
     name: "JoinEvent",
-    pattern: $"events/confirmation/",
+    pattern: $"Events/Confirmation/",
     defaults: new { controller = "Events", action = "JoinEvent" });
 
 app.MapControllerRoute(
-    name: "Login",
-    pattern: $"events/login/",
-    defaults: new { controller = "Events", action = "LogIn" });
-
-app.MapControllerRoute(
     name: "MyEvents",
-    pattern: "myevents/",
+    pattern: "MyEvents/",
     defaults: new { controller = "Events", action = "MyEvents" });
 
 app.MapControllerRoute(
     name: "UpComingEvents",
-    pattern: "events/",
+    pattern: "Events/",
     defaults: new { controller = "Events", action = "UpComingEvents" });
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Events}/{action=index}"); // = default values.
+    name: "Default",
+    pattern: "{controller=Events}/{action=index}"); // = default values.*/
 
 app.MapRazorPages();
 
@@ -73,15 +69,6 @@ using (var scope = app.Services.CreateScope())
         await admin.createDatabaseIfNotExists();
     }
 
-
-
-    var eventHandler = scope.ServiceProvider.GetService<EventHandler>();
-    //eventHandler.UserEventsList(1);
-    //eventHandler.GetEvents();
-    //eventHandler.GetAttendee(1);
-
-    var ctx =
-        scope.ServiceProvider.GetRequiredService<EventiaDbContext>();
 }
 
 //PHASE 3  - Server started

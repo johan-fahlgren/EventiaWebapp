@@ -1,0 +1,30 @@
+﻿@page
+@using EventiaWebapp.Services
+@model EventiaWebapp.Pages.MyEventsModel
+@inject EventService _eventService;
+@{
+    var eventList = _eventService.GetEvents();
+}
+
+  
+    <h1>NEW EVENTS</h1>
+    
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        
+    @foreach(var events in eventList)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="True" aria-controls="panelsStayOpen-collapseOne">
+                    <strong>@events.Titel</strong> - @events.Date
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    @events.Description
+                </div>
+            </div>
+        </div>
+    }
+
+    </div>

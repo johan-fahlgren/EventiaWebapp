@@ -4,14 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventiaWebapp.Services
 {
-
-
-    public class EventHandler
+    public class EventService
     {
-
         private readonly EventiaDbContext _context;
 
-        public EventHandler(EventiaDbContext context)
+        public EventService(EventiaDbContext context)
         {
             _context = context;
         }

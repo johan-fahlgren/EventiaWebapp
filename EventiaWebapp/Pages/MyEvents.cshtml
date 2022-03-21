@@ -1,0 +1,32 @@
+﻿@page
+@using EventiaWebapp.Services
+@model EventiaWebapp.Pages.MyEventsModel
+@inject EventService _eventService;
+@{
+    var userOneEvents = _eventService.UserEventsList(1);
+
+}
+<h1>MY EVENTS</h1>
+
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Event</th>
+        <th scope="col">Where</th>
+        <th scope="col">When</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (int i = 0; i < userOneEvents.Count; i++)
+    {
+        <tr>
+            <th scope="row">@(i+1)</th>
+            <td>@userOneEvents[i].Titel</td>
+            <td>@userOneEvents[i].Place</td>
+            <td>@userOneEvents[i].Date</td>
+        </tr>
+    }
+
+    </tbody>
+</table>

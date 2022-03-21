@@ -1,20 +1,19 @@
+using EventiaWebapp.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages
 {
     public class MyEventsModel : PageModel
     {
-        private readonly EventHandler _eventHandler;
+        private readonly EventService _eventService;
 
-        public MyEventsModel(EventHandler eventHandler)
+        public MyEventsModel(EventService eventService)
         {
-            this._eventHandler = eventHandler;
+            _eventService = eventService;
         }
-
 
         public void OnGet()
         {
-
         }
     }
 }
