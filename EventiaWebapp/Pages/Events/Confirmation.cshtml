@@ -1,0 +1,78 @@
+﻿@page "{eventId}"
+@model EventiaWebapp.Pages.Events.ConfirmationModel
+@{
+}
+
+<div class="card" style="width: 45rem;">
+    <div class="card-header">
+        Join this Event
+    </div>
+    <div class="card-top">
+        <img src="/img/confirm.jpg" class="card-img-top" alt="Event picture">
+        <h3 class="display-3 card-title">@Model.ThisEvent.Titel</h3>
+    </div>
+    <div class="card-body">
+        <h4 class="display-6"><b>@Model.ThisEvent.Titel</b> kommer till @Model.ThisEvent.Place</h4>
+        <p class="card-text">@Model.ThisEvent.Description</p>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <form method="post" asp-route-idEvent="@Model.ThisEvent.EventId">
+                <button class="btn btn-lg btn-dark">Join event</button>
+            </form>
+        </div>
+    </div>
+    <div class="card-footer">
+        @Model.ThisEvent.Date.ToShortDateString() - @Model.ThisEvent.Date.ToShortTimeString() &emsp;|&emsp; @Model.ThisEvent.Place &emsp;|&emsp; @Model.ThisEvent.Organizer.Name
+    </div>
+</div>
+
+<style>
+
+    .card {
+        border: none;
+    }
+
+    .card-header {
+        text-align: center;
+
+    }
+
+    .card-top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-img-top {
+        position: relative;
+    }
+
+    .card-title {
+        color: white;
+        text-shadow: 2px 2px 2px darkgrey;
+        padding: 0 100px;
+        position: absolute;
+    }
+
+    .card-text {
+        padding: 30px 0;
+    }
+
+    .card-body {
+        color: white;
+        background-color: #2f3337;
+    }
+
+    .card-footer {
+        text-align: center;
+    }
+
+    .btn-dark {
+        border: 2px solid white;
+    }
+
+    .btn-dark:hover {
+        border: 2px solid black;
+        background: white;
+        color: black;
+    }
+</style>

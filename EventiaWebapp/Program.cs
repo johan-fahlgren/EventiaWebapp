@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<Admin>();
 builder.Services.AddScoped<Database>();
 
-//Add EnventHandler ass service
+//Add EnventHandler as service
 builder.Services.AddScoped<EventService>();
 
 //Add database as service

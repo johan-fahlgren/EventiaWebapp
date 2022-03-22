@@ -1,18 +1,17 @@
 ﻿@page
+@using EventiaWebapp.Models
 @using EventiaWebapp.Services
-@model EventiaWebapp.Pages.MyEventsModel
-@inject EventService _eventService;
+@model EventiaWebapp.Pages.EventsModel
 @{
-    var eventList = _eventService.GetEvents();
     var number = 0;
 }
 
   
-    <h1 style="padding-top: 20px">UPCOMING EVENTS</h1>
+<h1 style="padding-top: 20px">UPCOMING EVENTS</h1>
     
-<div class="accordion" id="accordionPanelsStayOpenExample">
+<div class="accordion" id="accordionPanel">
         
-    @foreach(var events in eventList)
+    @foreach(var events in Model.EventList )
     {
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading-@number">
@@ -25,9 +24,13 @@
                     <h4> @events.Titel kommer till @events.Place </h4><br/><br/> 
                     @events.Description
                 </div>
-                <div class="join-btn d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-dark" type="submit">Join</button>
-                </div>
+                
+            <div class="join-btn d-grid gap-2 d-md-flex justify-content-md-end">
+                <form method="post" asp-route-idEvent="@events.EventId">
+                <button class="btn btn-dark">Join</button>
+                </form>
+            </div>
+               
             </div>
         </div>
 
@@ -40,10 +43,15 @@
 
     .accordion {
         padding-top: 40px;
+        padding-bottom: 100px;
     }
 
     button {
         color: white;
+    }
+
+    button.accordion-button:focus {
+        box-shadow: none;
     }
 
     button.accordion-button::after {

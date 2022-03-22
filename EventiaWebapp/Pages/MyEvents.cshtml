@@ -1,10 +1,7 @@
 ﻿@page
 @using EventiaWebapp.Services
 @model EventiaWebapp.Pages.MyEventsModel
-@inject EventService _eventService;
 @{
-    var userOneEvents = _eventService.UserEventsList(1);
-
 }
 <h1>MY EVENTS</h1>
 
@@ -19,14 +16,14 @@
     </tr>
     </thead>
     <tbody>
-    @for (int i = 0; i < userOneEvents.Count; i++)
+    @for (int i = 0; i < Model.UserOneEvents.Count; i++)
     {
         <tr>
             <th scope="row">@(i+1)</th>
-            <td>@userOneEvents[i].Titel</td>
-            <td>@userOneEvents[i].Place</td>
-            <td>@userOneEvents[i].Date.ToShortDateString()</td>
-            <td>@userOneEvents[i].Date.ToShortTimeString()</td>
+            <td>@Model.UserOneEvents[i].Titel</td>
+            <td>@Model.UserOneEvents[i].Place</td>
+            <td>@Model.UserOneEvents[i].Date.ToShortDateString()</td>
+            <td>@Model.UserOneEvents[i].Date.ToShortTimeString()</td>
         </tr>
     }
 

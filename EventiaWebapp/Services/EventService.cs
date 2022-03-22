@@ -14,9 +14,10 @@ namespace EventiaWebapp.Services
         }
 
         //TODO(✓)  - A method that returns a list of all events.
-        public List<Event> GetEvents()
+        public List<Event?> GetEvents()
         {
             var eventList = _context.Events
+                .Include(e => e.Organizer)
                 .ToList();
 
             return eventList;
@@ -29,7 +30,7 @@ namespace EventiaWebapp.Services
         {
 
             var attendee = _context.Attendees
-                .FirstOrDefault(a => a.AttendeeId == userId);
+               .FirstOrDefault(a => a.AttendeeId == userId);
 
             if (attendee == null)
             {
@@ -43,7 +44,6 @@ namespace EventiaWebapp.Services
         //TODO(✓)  - A method that adds a event object to a attendee object.
         public void AddEventToAttendee(int userId, int eventId)
         {
-
             var attendee = _context.Attendees
                 .Include(a => a.Events)
                 .FirstOrDefault(a => a.AttendeeId == userId);
@@ -62,13 +62,11 @@ namespace EventiaWebapp.Services
         //TODO(✓)  - A method that returns a list of all events for one Attendee object. 
         public List<Event> UserEventsList(int userId)
         {
-
-            userId = 1;
+            userId = 1;  //default userId
 
             var attendee = _context.Attendees
                 .Include(a => a.Events)
                 .FirstOrDefault(a => a.AttendeeId == userId);
-
 
             var eventList = attendee.Events;
 

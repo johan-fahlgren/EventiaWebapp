@@ -151,7 +151,7 @@ namespace DataLayer.Data
             await _context.AddRangeAsync(events);
 
             //EventLists
-            var johansEvents = new List<Event> { events[1], events[2] };
+            var johansEvents = new List<Event> { events[0], events[2] };
             var piasEvents = new List<Event> { events[3], events[0] };
             var annaMartasEvents = new List<Event> { events[0], events[5] };
 
@@ -162,7 +162,7 @@ namespace DataLayer.Data
                 {
                     Name = "Johan", Email = "Johan@mail.com",
                     Phone_Number = "076-1234567", Events = johansEvents,
-            },
+                },
                 new ()
                 {
                     Name = "Pia", Email = "pia@mail.com",
