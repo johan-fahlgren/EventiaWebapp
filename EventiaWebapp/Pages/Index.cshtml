@@ -2,5 +2,38 @@
 @model EventiaWebapp.Pages.IndexModel
 @{
 }
+<div class="hero-img">
+    <h1 class="hero-text">EVENTIA</h1>
+    <img src="~/img/eventia.jpg" class="img-fluid" alt="Eventia hero image">
+</div>
 
-<img src="/img/eventia.jpg" class="img-fluid" alt="Eventia hero image">
+
+<style>
+
+    .hero-img {
+        position: relative;
+        width: 720px;
+        height: 1100px;
+        
+    }
+
+    .hero-text {
+        color: white;
+        width: 720px;
+        text-align: center;
+        padding-top: 250px;
+        font-size: 7rem;
+        position: absolute;
+        text-shadow: 2px 2px 2px #212529;
+
+    }
+
+    .img-fluid {
+        height: 1100px;
+        border: 5px solid #212529;
+        border-radius: 3px;
+    }
+
+
+</style>
+
