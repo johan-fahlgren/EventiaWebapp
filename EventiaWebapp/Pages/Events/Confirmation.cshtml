@@ -5,18 +5,19 @@
 
 <div class="card" style="width: 45rem;">
     <div class="card-header">
-        Join this Event
+        <b>@Model.ThisEvent.Place</b> presenterar stolt
     </div>
     <div class="card-top">
         <img src="/img/confirm.jpg" class="card-img-top" alt="Event picture">
         <h3 class="display-3 card-title">@Model.ThisEvent.Titel</h3>
     </div>
     <div class="card-body">
-        <h4 class="display-6"><b>@Model.ThisEvent.Titel</b> kommer till @Model.ThisEvent.Place</h4>
-        <p class="card-text">@Model.ThisEvent.Description</p>
-        <div class="d-grid gap-2 col-6 mx-auto">
+        <p class="card-text">@Model.ThisEvent.Description <br/><br/> 
+            Seats available: @Model.ThisEvent.Spots_Available <br/> 
+            Address: @Model.ThisEvent.Address </p>
+        <div class="d-flex justify-content-center">
             <form method="post" asp-route-idEvent="@Model.ThisEvent.EventId">
-                <button class="btn btn-lg btn-dark">Join event</button>
+                <button type="submit" class="btn btn-lg btn-dark">Join event</button>
             </form>
         </div>
     </div>
@@ -24,6 +25,17 @@
         @Model.ThisEvent.Date.ToShortDateString() - @Model.ThisEvent.Date.ToShortTimeString() &emsp;|&emsp; @Model.ThisEvent.Place &emsp;|&emsp; @Model.ThisEvent.Organizer.Name
     </div>
 </div>
+
+@if (HttpContext.Request.Method == "GET")
+{
+    <h5></h5>
+}
+else
+{   
+    <div class="success d-flex justify-content-center">
+    <h4>You successfully joined this event!</h4>
+    </div>
+}
 
 <style>
 
@@ -54,7 +66,8 @@
     }
 
     .card-text {
-        padding: 30px 0;
+        font-size: large;
+        padding: 10px 0;
     }
 
     .card-body {
@@ -74,5 +87,10 @@
         border: 2px solid black;
         background: white;
         color: black;
+    }
+
+    .success {
+        padding: 40px 0;
+
     }
 </style>

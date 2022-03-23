@@ -23,7 +23,10 @@ builder.Services.AddDbContext<EventiaDbContext>(options =>
      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Add Debugging
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+}
 
 
 //PHASE 2 - Middleware pipeline (Configure the HTTP request pipeline).
@@ -34,24 +37,12 @@ app.UseRouting();
 
 app.UseStaticFiles();
 
-/*app.MapControllerRoute(
-    name: "JoinEvent",
-    pattern: $"Events/Confirmation/",
-    defaults: new { controller = "Events", action = "JoinEvent" });
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 
-app.MapControllerRoute(
-    name: "MyEvents",
-    pattern: "MyEvents/",
-    defaults: new { controller = "Events", action = "MyEvents" });
-
-app.MapControllerRoute(
-    name: "UpComingEvents",
-    pattern: "Events/",
-    defaults: new { controller = "Events", action = "UpComingEvents" });
-
-app.MapControllerRoute(
-    name: "Default",
-    pattern: "{controller=Events}/{action=index}"); // = default values.*/
+app.UseExceptionHandler("/error");
 
 app.MapRazorPages();
 

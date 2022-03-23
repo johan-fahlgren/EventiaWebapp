@@ -95,7 +95,7 @@ namespace DataLayer.Data
                         " sig Frida Hyvönen ut på en omfattande vårturné som inleds 25 februari i Luleå." +
                         "Frida Hyvönen albumdebuterade 2005 med ”Until Death Comes”. " +
                         "Två ytterligare engelskspråkiga album följde, ”Silence is Wild” (2008) " +
-                        "och ”To the Soul” (2012), 07)",
+                        "och ”To the Soul” (2012)",
                     Place = "Kungsbacka Teater",
                     Address = "Gymnasiegatan 42, 434 50 KUNGSBACKA",
                     Date = new DateTime(2022, 4, 2, 19, 00, 00),
@@ -121,11 +121,11 @@ namespace DataLayer.Data
                     Titel = "Alla känner Ankan",
                     Organizer = organizers[2],
                     Description =
-                        "Med det senaste vida hyllade albumet ”Dream of Independence” i ryggen ger" +
-                        " sig Frida Hyvönen ut på en omfattande vårturné som inleds 25 februari i Luleå." +
-                        "Frida Hyvönen albumdebuterade 2005 med ”Until Death Comes”. " +
-                        "Två ytterligare engelskspråkiga album följde, ”Silence is Wild” (2008) " +
-                        "och ”To the Soul” (2012), 07)",
+                        "Anders ”Ankan” Johansson utsågs 2020 till årets manliga komiker och samma år gjorde" +
+                        " han stor succé i tv-program som ”Bäst i test” och ”På spåret på SVT”. Anders är för" +
+                        " många känd som ena halvan i humorduon Anders & Måns som har spelat flera hyllade" +
+                        " scenföreställningar tillsammans. Nu är han aktuell med sin nya enmansföreställning" +
+                        " ”Alla känner Ankan – En humorshow av och med Anders Johansson.”",
                     Place = "Gävle Teater",
                     Address = "Teaterplan 1, 803 23 GÄVLE",
                     Date = new DateTime(2022, 10, 29, 19, 30, 00),

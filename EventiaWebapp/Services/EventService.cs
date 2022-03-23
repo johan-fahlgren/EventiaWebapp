@@ -32,12 +32,8 @@ namespace EventiaWebapp.Services
             var attendee = _context.Attendees
                .FirstOrDefault(a => a.AttendeeId == userId);
 
-            if (attendee == null)
-            {
-                return null;
-            }
+            return (attendee ?? null) ?? throw new InvalidOperationException();
 
-            return attendee;
         }
 
 
@@ -48,11 +44,11 @@ namespace EventiaWebapp.Services
                 .Include(a => a.Events)
                 .FirstOrDefault(a => a.AttendeeId == userId);
 
-            var eventQuery = _context.Events
+            var thisEvent = _context.Events
                 .FirstOrDefault(e => e.EventId == eventId);
 
 
-            attendee.Events.Add(eventQuery);
+            attendee.Events.Add(thisEvent);
             _context.SaveChanges();
 
 

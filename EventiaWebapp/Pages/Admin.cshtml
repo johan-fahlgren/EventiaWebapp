@@ -3,18 +3,29 @@
 @{
 }
 
-<h4>ADMIN PAGE</h4>
+<h4 class="display-6">(つ▀¯▀ )つ SUPER SECRET ADMIN PAGE ⊂(▀¯▀⊂ )</h4>
 
 <form method="post">
     
     @if (HttpContext.Request.Method == "GET")
     {
-        <h5>Do you want to reset database</h5>
+        <h5 style="text-align: center">Do you want to reset database</h5>
     }
     else
     {
-        <h5>Database recreated</h5>
+        <h5 style="text-align: center">Database recreated</h5>
     }
-    <button type="submit">Reset</button>
-
+    <div class="d-flex justify-content-center">
+    <button  type="submit">Reset</button>
+    </div>
 </form>
+
+<style>
+
+    .display-6 {
+        text-align: center;
+        padding: 40px 0;
+        font-size: 1.6rem;
+    }
+
+</style>

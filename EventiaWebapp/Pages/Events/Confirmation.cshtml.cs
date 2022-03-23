@@ -1,5 +1,6 @@
 using EventiaWebapp.Models;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages.Events
@@ -8,10 +9,12 @@ namespace EventiaWebapp.Pages.Events
     {
         private readonly EventService _eventService;
         public Event? ThisEvent { get; set; }
+        private readonly ILogger<ConfirmationModel> _logger;
 
-        public ConfirmationModel(EventService eventService)
+        public ConfirmationModel(ILogger<ConfirmationModel> logger, EventService eventService)
         {
             _eventService = eventService;
+            _logger = logger;
         }
 
         public void OnGet(int eventId)
@@ -20,9 +23,20 @@ namespace EventiaWebapp.Pages.Events
                 .Find(e => e.EventId == eventId);
         }
 
-        public void OnPost(int idEvent)
+        public IActionResult OnPost(int idEvent)
         {
+            ThisEvent = _eventService.GetEvents()
+                .Find(e => e.EventId == idEvent);
+
+            if (ThisEvent == null)
+            {
+                _logger.LogError("Missing event info, try again");
+                RedirectToPage("../error", new { errorMsg = "ERROR! WARNING!" });
+            }
+
             _eventService.AddEventToAttendee(1, idEvent);
+
+            return Page();
         }
     }
 }
