@@ -64,9 +64,12 @@ namespace EventiaWebapp.Services
                 .Include(a => a.Events)
                 .FirstOrDefault(a => a.AttendeeId == userId);
 
-            var eventList = attendee.Events;
+            var eventList = attendee.Events.ToList();
 
-            return eventList.ToList();
+            eventList.Sort((date1, date2) =>
+               DateTime.Compare(date1.Date, date2.Date));
+
+            return eventList;
         }
 
 

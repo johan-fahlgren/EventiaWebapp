@@ -25,18 +25,21 @@ namespace EventiaWebapp.Pages.Events
 
         public IActionResult OnPost(int idEvent)
         {
+
             ThisEvent = _eventService.GetEvents()
                 .Find(e => e.EventId == idEvent);
+
 
             if (ThisEvent == null)
             {
                 _logger.LogError("Missing event info, try again");
-                RedirectToPage("../error", new { errorMsg = "ERROR! WARNING!" });
+                return RedirectToPage("../error", new { errorMsg = "Missing event info, please try again" });
             }
 
-            _eventService.AddEventToAttendee(1, idEvent);
 
+            _eventService.AddEventToAttendee(1, idEvent); //Default userId, for exercise.
             return Page();
+
         }
     }
 }

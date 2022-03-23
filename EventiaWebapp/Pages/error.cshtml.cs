@@ -5,6 +5,7 @@ namespace EventiaWebapp.Pages
     public class errorModel : PageModel
     {
         private readonly ILogger<errorModel> _logger;
+
         public string ErrorMessage;
 
         public errorModel(ILogger<errorModel> logger)
