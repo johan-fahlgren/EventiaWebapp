@@ -66,9 +66,10 @@ namespace DataLayer.Data
                     Place = "Avicii Arena",
                     Address = "Globentorget 2, 12177 JOHANNESHOV",
                     Date = new DateTime(2022, 4, 29, 19, 00, 00),
-                    Spots_Available = 10000
+                    Spots_Available = 10000,
+                    EventImg = "/img/event_img/ghost.png"
                 },
-                new()
+                new ()
                 {
                     Titel = "TOOL",
                     Organizer = organizers[0],
@@ -83,10 +84,11 @@ namespace DataLayer.Data
                     Place = "Avicii Arena",
                     Address = "Globentorget 2, 12177 JOHANNESHOV",
                     Date = new DateTime(2022, 4, 26, 20, 45, 00),
-                    Spots_Available = 10000
+                    Spots_Available = 10000,
+                    EventImg = "/img/event_img/tool.jpg"
                 },
 
-                new()
+                new ()
                 {
                     Titel = "Frida Hyvönen",
                     Organizer = organizers[1],
@@ -99,7 +101,8 @@ namespace DataLayer.Data
                     Place = "Kungsbacka Teater",
                     Address = "Gymnasiegatan 42, 434 50 KUNGSBACKA",
                     Date = new DateTime(2022, 4, 2, 19, 00, 00),
-                    Spots_Available = 780
+                    Spots_Available = 780,
+                    EventImg = "/img/event_img/frida_h.jpg"
                 },
                 new()
                 {
@@ -114,7 +117,8 @@ namespace DataLayer.Data
                     Place = "Kungsbacka Teater",
                     Address = "Gymnasiegatan 42, 434 50 KUNGSBACKA",
                     Date = new DateTime(2022, 9, 9, 19, 30, 00),
-                    Spots_Available = 780
+                    Spots_Available = 780,
+                    EventImg = "/img/event_img/joanthan_unge.jpg"
                 },
                 new()
                 {
@@ -129,7 +133,8 @@ namespace DataLayer.Data
                     Place = "Gävle Teater",
                     Address = "Teaterplan 1, 803 23 GÄVLE",
                     Date = new DateTime(2022, 10, 29, 19, 30, 00),
-                    Spots_Available = 900
+                    Spots_Available = 900,
+                    EventImg = "/img/event_img/ankan.jpg"
                 },
                 new()
                 {
@@ -144,7 +149,8 @@ namespace DataLayer.Data
                     Place = "Gävle Teater",
                     Address = "Teaterplan 1, 803 23 GÄVLE",
                     Date = new DateTime(2022, 6, 11, 16, 00, 00),
-                    Spots_Available = 900
+                    Spots_Available = 900,
+                    EventImg = "/img/event_img/operan.jpeg"
                 }
             };
 

@@ -9,7 +9,9 @@ namespace EventiaWebapp.Pages.Events
     {
         private readonly EventService _eventService;
         public Event? ThisEvent { get; set; }
+        public Attendee Attendee { get; set; }
         private readonly ILogger<ConfirmationModel> _logger;
+
 
         public ConfirmationModel(ILogger<ConfirmationModel> logger, EventService eventService)
         {
@@ -19,13 +21,15 @@ namespace EventiaWebapp.Pages.Events
 
         public void OnGet(int eventId)
         {
+            Attendee = _eventService.GetAttendee(1);
+
             ThisEvent = _eventService.GetEvents()
                 .Find(e => e.EventId == eventId);
         }
 
         public IActionResult OnPost(int idEvent)
         {
-
+            Attendee = _eventService.GetAttendee(1);
             ThisEvent = _eventService.GetEvents()
                 .Find(e => e.EventId == idEvent);
 

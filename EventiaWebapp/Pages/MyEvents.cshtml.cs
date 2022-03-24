@@ -8,6 +8,7 @@ namespace EventiaWebapp.Pages
     {
         private readonly EventService _eventService;
         public List<Event> UserOneEvents { get; set; }
+        public Attendee Attendee { get; set; }
 
 
         public MyEventsModel(EventService eventService)
@@ -18,6 +19,7 @@ namespace EventiaWebapp.Pages
         public void OnGet()
         {
             UserOneEvents = _eventService.UserEventsList(1);
+            Attendee = _eventService.GetAttendee(1);
         }
     }
 }

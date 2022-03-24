@@ -1,4 +1,20 @@
-﻿html {
+﻿@font-face {
+    font-family: sfpro;
+    src: url("SFProDisplay-Regular.ttf");
+}
+@font-face {
+    font-family: gosber;
+    src: url("GosberBrush.ttf");
+}
+@font-face {
+    font-family: parisVan;
+    src: url("ParisVanJavaBold.ttf");
+}
+
+
+/*_layout*/
+
+html {
     background-color: #ffff;
     margin: 0;
     padding: 0;
@@ -10,12 +26,16 @@ body {
     font-family: Cascadia Mono;
     background-color: #a2b9bc;
     min-height: 100vh;
-    width: 800px;
-    margin: auto;
+    width: 100%;
+    margin-bottom: 50px;
 }
 
 main {
+    margin: 0 auto;
+    width: 800px;
+    height: inherit;
     padding: 20px 40px;
+    background-color: #a2b9bc;
 }
 
 p {
@@ -26,12 +46,23 @@ li {
     font-size: 1.2rem;
 }
 
+.devider {
+    font-weight: bold;
+    color: darkgrey;
+    margin: 0;
+    padding: 8px;
+}
+
 .navbar {
-    margin: 0px;
+    width: 100%;
     padding: 20px;
-    background-color: bisque;
     display: flex;
     gap: 30px;
+}
+
+.nav-div {
+    width: 750px;
+    margin: auto;
 }
 
 .navbar > li {
@@ -39,25 +70,202 @@ li {
     font-size: 1.4rem;
 }
 
-.todays_date {
-    color: darkslategrey;
-    font-weight: bold;
-    font-size: 1.6rem;
-    background-color: bisque;
-    padding: 10px;
-}
 
 footer {
     position: fixed;
     bottom: 0px;
-    width: 800px;
+    width: 100%;
     padding: 10px 0px;
     background-color: #212529;
 }
 
-footer > p {
+.footer-div {
+    margin: auto;
+    width: 800px;
+}
+
+.footer-div > p {
     color: white;
     text-align: center;
     margin: 0 40px;
     font-size: 1.2rem;
 }
+
+/*Index*/
+
+.hero-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-header {
+    color: white;
+    width: 720px;
+    text-align: center;
+    padding-top: 120px;
+    font-size: 7rem;
+    position: absolute;
+    text-shadow: 2px 2px 2px #212529;
+    font-family: gosber;
+}
+
+.hero-text {
+    color: white;
+    width: 720px;
+    text-align: center;
+    padding: 50px;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    background-color: #2f3337;
+}
+
+.img-fluid {
+    height: 100%;
+}
+
+
+/*Events*/
+
+.accordion {
+    padding-bottom: 100px;
+}
+
+.event-time {
+    position: absolute;
+    right: 60px;
+}
+
+button.accordion-button {
+    position: relative;
+}
+
+button {
+    color: white;
+}
+
+button.accordion-button:focus {
+    box-shadow: none;
+    background-color: #2f3337
+}
+
+button.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+button.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.join-btn {
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-dark:hover {
+    cursor: pointer;
+    color: #212529;
+    background: #5c636a;
+}
+
+/*My Events*/
+
+td {
+    font-weight: lighter;
+}
+
+/*Login*/
+
+.display-6 {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 1.6rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-floating {
+    width: 60%;
+}
+
+/*Confirmation*/
+
+.card {
+    Margin-top: 50px;
+    border: none;
+}
+
+.card-header {
+    text-align: center;
+    background-color: #2f3337;
+    border-bottom: 2px solid white;
+    color: white;
+}
+
+.card-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-img, .card-img-top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.card-title {
+    font-family: sfpro;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 2px darkgrey;
+    position: absolute;
+}
+
+.card-text {
+    
+    font-size: large;
+    padding: 10px 0;
+    margin: 0;
+    font-weight: lighter;
+}
+
+.event-img {
+    width: 720px;
+    height: 480px;
+    position: relative;
+    object-fit: cover;
+
+}
+
+.card-body {
+    border-top: 2px solid white;
+    color: white;
+    background-color: #2f3337;
+}
+
+.card-footer {
+    text-align: center;
+    background-color: #2f3337;
+    border-top: 2px solid white;
+    color: white;
+}
+
+.btn-dark {
+    border: 2px solid #2f3337;
+}
+
+.btn-dark:hover {
+    border: 2px solid black;
+    background: white;
+    color: black;
+}
+
+.success {
+    padding: 40px 0;
+}
+

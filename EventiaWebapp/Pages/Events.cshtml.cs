@@ -18,6 +18,7 @@ namespace EventiaWebapp.Pages
         public void OnGet()
         {
             EventList = _eventService.GetEvents();
+
         }
 
         public IActionResult OnPost(int idEvent)

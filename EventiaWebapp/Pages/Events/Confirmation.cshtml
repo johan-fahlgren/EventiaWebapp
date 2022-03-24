@@ -8,13 +8,13 @@
         <b>@Model.ThisEvent.Place</b> presenterar stolt
     </div>
     <div class="card-top">
-        <img src="/img/confirm.jpg" class="card-img-top" alt="Event picture">
+        <img src="@Model.ThisEvent.EventImg" class="event-img card-img-top">
         <h3 class="display-3 card-title">@Model.ThisEvent.Titel</h3>
     </div>
     <div class="card-body">
         <p class="card-text">@Model.ThisEvent.Description <br/><br/> 
-            Seats available: @Model.ThisEvent.Spots_Available <br/> 
-            Address: @Model.ThisEvent.Address </p>
+            <b>Seats available:</b> @Model.ThisEvent.Spots_Available <br/> 
+            <b>Address:</b> @Model.ThisEvent.Address </p>
         <div class="d-flex justify-content-center">
             <form method="post" asp-route-idEvent="@Model.ThisEvent.EventId">
                 <button type="submit" class="btn btn-lg btn-dark">Join event</button>
@@ -28,69 +28,14 @@
 
 @if (HttpContext.Request.Method == "GET")
 {
-    <h5></h5>
+    <div class="card py-0 success d-flex justify-content-center my-2">
+    <h5 class="display-6 py-1">Not joined</h5>
+    </div>
 }
 else
 {   
-    <div class="success d-flex justify-content-center">
-    <h4>You successfully joined this event!</h4>
+    <div class="card py-0 success d-flex justify-content-center my-2">
+        <h5 class="display-6 py-1">You successfully joined @Model.ThisEvent.Titel!,
+            See you there @Model.Attendee.Name!</h5>
     </div>
 }
-
-<style>
-
-    .card {
-        border: none;
-    }
-
-    .card-header {
-        text-align: center;
-
-    }
-
-    .card-top {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .card-img-top {
-        position: relative;
-    }
-
-    .card-title {
-        color: white;
-        text-shadow: 2px 2px 2px darkgrey;
-        padding: 0 100px;
-        position: absolute;
-    }
-
-    .card-text {
-        font-size: large;
-        padding: 10px 0;
-    }
-
-    .card-body {
-        color: white;
-        background-color: #2f3337;
-    }
-
-    .card-footer {
-        text-align: center;
-    }
-
-    .btn-dark {
-        border: 2px solid white;
-    }
-
-    .btn-dark:hover {
-        border: 2px solid black;
-        background: white;
-        color: black;
-    }
-
-    .success {
-        padding: 40px 0;
-
-    }
-</style>
