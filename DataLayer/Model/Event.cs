@@ -22,7 +22,7 @@ namespace DataLayer.Model
 
         public string EventImg { get; set; }
 
-        [Required]
+
         [ForeignKey("EventiaUser")]
         public EventiaUser organizer { get; set; }
 

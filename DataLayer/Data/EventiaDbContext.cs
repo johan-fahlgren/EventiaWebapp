@@ -1,10 +1,11 @@
 ﻿using DataLayer.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Data
 {
-    public class EventiaDbContext : IdentityDbContext<EventiaUser>
+    public class EventiaDbContext : IdentityDbContext<EventiaUser, IdentityRole, string>
     {
         //public DbSet<Attendee>? Attendees { get; set; }
         public DbSet<Event?>? Events { get; set; }
@@ -13,11 +14,7 @@ namespace DataLayer.Data
 
         public EventiaDbContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-
-        }
+        //protected void OnModelCreating(ModelBuilder modelBuilder){}
 
 
 

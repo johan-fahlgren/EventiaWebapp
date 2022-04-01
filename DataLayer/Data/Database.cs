@@ -7,11 +7,13 @@ namespace DataLayer.Data
     {
         private readonly EventiaDbContext _context;
         private readonly UserManager<EventiaUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public Database(EventiaDbContext context, UserManager<EventiaUser> userManager)
+        public Database(EventiaDbContext context, UserManager<EventiaUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this._context = context;
             this._userManager = userManager;
+            this._roleManager = roleManager;
         }
 
 
@@ -164,17 +166,26 @@ namespace DataLayer.Data
             {
                 new()
                 {
-                    FirstName = "Johan", LastName = "Fahlgren",
+                    FirstName = "Johan",
+                    LastName = "Fahlgren",
+                    UserName = "Felhan",
+                    Email = "johanfahlgren@gmail.com",
                     JoinedEvent = johansEvents,
                 },
                 new ()
                 {
-                    FirstName = "Pia", LastName = "Hagman",
+                    FirstName = "Pia",
+                    LastName = "Hagman",
+                    UserName = "Pim",
+                    Email = "piaHagman@gmail.com",
                     JoinedEvent = piasEvents,
                 },
                 new ()
                 {
-                    FirstName = "AnnaMärta", LastName = "Hjalmarson",
+                    FirstName = "AnnaMärta",
+                    LastName = "Hjalmarson",
+                    UserName = "Morten",
+                    Email = "annamartahjalmarson@gmail.com",
                     JoinedEvent = annaMartasEvents
                 }
             };
@@ -184,6 +195,19 @@ namespace DataLayer.Data
             {
                 await _userManager.CreateAsync(user, password: "pAssw0rd!");
             };
+
+
+            var roles = new List<IdentityRole>
+            {
+                new() { Name = "user" },
+                new() { Name = "organizer"},
+                new() { Name = "administrator"}
+            };
+
+            foreach (var role in roles)
+            {
+                await _roleManager.CreateAsync(role);
+            }
 
 
 

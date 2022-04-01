@@ -2,6 +2,7 @@ using DataLayer.Backend;
 using DataLayer.Data;
 using DataLayer.Model;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -21,13 +22,19 @@ builder.Services.AddScoped<EventService>();
 
 //Add database as service
 builder.Services.AddDbContext<EventiaDbContext>(options =>
-     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    //options.EnableSensitiveDataLogging(); -Console logging. 
+});
+
 
 //Add Identity service
+builder.Services.AddIdentity<EventiaUser, IdentityRole>(
+ options =>
+ {
+     options.SignIn.RequireConfirmedAccount = true;
 
-builder.Services.AddDefaultIdentity<EventiaUser>(
- options => options.SignIn.RequireConfirmedAccount = true)
-  .AddEntityFrameworkStores<EventiaDbContext>();
+ }).AddEntityFrameworkStores<EventiaDbContext>();
 
 
 
