@@ -1,9 +1,10 @@
 ﻿using EventiaWebapp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Data
 {
-    public class EventiaDbContext : DbContext
+    public class EventiaDbContext : IdentityDbContext
     {
         public DbSet<Attendee>? Attendees { get; set; }
         public DbSet<Event?>? Events { get; set; }

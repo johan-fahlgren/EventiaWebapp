@@ -22,6 +22,13 @@ builder.Services.AddScoped<EventService>();
 builder.Services.AddDbContext<EventiaDbContext>(options =>
      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//Add Identity service
+
+//builder.Services.AddDefaultIdentity<identityUser>(
+//  options => options.SignIn.RequireConfirmedAccount = true)
+//  .AddEntityFrameworkStores<EventiaDbContext>();
+
+
 //Add Debugging
 if (builder.Environment.IsDevelopment())
 {
