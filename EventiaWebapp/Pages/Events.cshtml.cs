@@ -1,4 +1,4 @@
-using EventiaWebapp.Models;
+using DataLayer.Model;
 using EventiaWebapp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,7 +17,7 @@ namespace EventiaWebapp.Pages
 
         public void OnGet()
         {
-            EventList = _eventService.GetEvents();
+            //EventList = _eventService.GetEvents();
 
         }
 

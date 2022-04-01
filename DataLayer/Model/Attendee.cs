@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EventiaWebapp.Models
+namespace DataLayer.Model
 {
     public class Attendee
     {

@@ -1,14 +1,17 @@
-﻿using EventiaWebapp.Models;
+﻿using DataLayer.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace DataLayer.Data
 {
     public class Database
     {
         private readonly EventiaDbContext _context;
+        private readonly UserManager<EventiaUser> _userManager;
 
-        public Database(EventiaDbContext context)
+        public Database(EventiaDbContext context, UserManager<EventiaUser> userManager)
         {
             this._context = context;
+            this._userManager = userManager;
         }
 
 
@@ -39,7 +42,7 @@ namespace DataLayer.Data
 
         public async Task SeedTestDataBase()
         {
-
+            /*   
             var organizers = new List<Organizer>
             {
                 new () {Name= "World Tours.inc", Email = "info@worldtours.com", Phone_Number = "0220-12345"},
@@ -49,14 +52,13 @@ namespace DataLayer.Data
             };
 
             await _context.AddRangeAsync(organizers);
-
+            */
 
             var events = new List<Event>
             {
                 new()
                 {
                     Titel = "Ghost",
-                    Organizer = organizers[0],
                     Description =
                         "Ghost klassas idag som ett av världens mest älskade metalband!" +
                         " De är hyllade, prisbelönta och har alltid utmanat och skapat rubriker." +
@@ -72,7 +74,6 @@ namespace DataLayer.Data
                 new ()
                 {
                     Titel = "TOOL",
-                    Organizer = organizers[0],
                     Description =
                         "TOOL TILLBAKA TILL SVERIGE FÖR FÖRSTA GÅNGEN PÅ FEMTON ÅR!" +
                         "Femton år har gått sedan bandet senast spelade på svensk mark" +
@@ -91,7 +92,6 @@ namespace DataLayer.Data
                 new ()
                 {
                     Titel = "Frida Hyvönen",
-                    Organizer = organizers[1],
                     Description =
                         "Med det senaste vida hyllade albumet ”Dream of Independence” i ryggen ger" +
                         " sig Frida Hyvönen ut på en omfattande vårturné som inleds 25 februari i Luleå." +
@@ -107,7 +107,6 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Humorkväll med Jonathan Unge & Ahmed Berhan",
-                    Organizer = organizers[1],
                     Description =
                         "Nu blir det humor på hög nivå inne på salongen på Kungsbacka Teater." +
                         "Jonatan Unge är den anemiska kulturpojken från Djurgården som trots reumatism" +
@@ -123,7 +122,6 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Alla känner Ankan",
-                    Organizer = organizers[2],
                     Description =
                         "Anders ”Ankan” Johansson utsågs 2020 till årets manliga komiker och samma år gjorde" +
                         " han stor succé i tv-program som ”Bäst i test” och ”På spåret på SVT”. Anders är för" +
@@ -139,7 +137,6 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "En afton på Operan",
-                    Organizer = organizers[2],
                     Description =
                         "Var med och hör framtidens operasångare i början av sin karriär," +
                         " på väg ut i den internationella operavärlden. Tillsammans med dirigent" +
@@ -155,6 +152,7 @@ namespace DataLayer.Data
             };
 
             await _context.AddRangeAsync(events);
+            await _context.SaveChangesAsync();
 
             //EventLists
             var johansEvents = new List<Event> { events[0], events[2] };
@@ -162,27 +160,34 @@ namespace DataLayer.Data
             var annaMartasEvents = new List<Event> { events[0], events[5] };
 
 
-            var attendees = new List<Attendee>
+            var eventiaUser = new List<EventiaUser>
             {
                 new()
                 {
-                    Name = "Johan", Email = "Johan@mail.com",
-                    Phone_Number = "076-1234567", Events = johansEvents,
+                    FirstName = "Johan", LastName = "Fahlgren",
+                    JoinedEvent = johansEvents,
                 },
                 new ()
                 {
-                    Name = "Pia", Email = "pia@mail.com",
-                    Phone_Number = "070-1234567", Events = piasEvents,
+                    FirstName = "Pia", LastName = "Hagman",
+                    JoinedEvent = piasEvents,
                 },
                 new ()
                 {
-                    Name = "AnnaMärta", Email = "AnnaMärta@mail.com",
-                    Phone_Number = "073-1234567", Events = annaMartasEvents
+                    FirstName = "AnnaMärta", LastName = "Hjalmarson",
+                    JoinedEvent = annaMartasEvents
                 }
             };
 
-            await _context.AddRangeAsync(attendees);
-            await _context.SaveChangesAsync();
+
+            foreach (var user in eventiaUser)
+            {
+                await _userManager.CreateAsync(user, password: "pAssw0rd!");
+            };
+
+
+
+
 
         }
 

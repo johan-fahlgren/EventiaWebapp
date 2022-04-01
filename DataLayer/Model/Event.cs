@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EventiaWebapp.Models
+namespace DataLayer.Model
 {
     public class Event
     {
@@ -8,8 +9,6 @@ namespace EventiaWebapp.Models
         public int EventId { get; set; }
         [Required]
         public string Titel { get; set; }
-        [Required]
-        public Organizer Organizer { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
@@ -23,10 +22,12 @@ namespace EventiaWebapp.Models
 
         public string EventImg { get; set; }
 
-        public ICollection<Attendee> Attendees
-        { get; set; }
+        [Required]
+        [ForeignKey("EventiaUser")]
+        public EventiaUser organizer { get; set; }
 
-
+        [ForeignKey("EventiaUser")]
+        public ICollection<EventiaUser> attendee { get; set; }
 
 
     }

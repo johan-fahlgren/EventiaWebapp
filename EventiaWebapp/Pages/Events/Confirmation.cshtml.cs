@@ -1,4 +1,4 @@
-using EventiaWebapp.Models;
+using DataLayer.Model;
 using EventiaWebapp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -21,17 +21,17 @@ namespace EventiaWebapp.Pages.Events
 
         public void OnGet(int eventId)
         {
-            Attendee = _eventService.GetAttendee(1);
+            //Attendee = _eventService.GetAttendee(1);
 
-            ThisEvent = _eventService.GetEvents()
-                .Find(e => e.EventId == eventId);
+            //ThisEvent = _eventService.GetEvents()
+            //.Find(e => e.EventId == eventId);
         }
 
         public IActionResult OnPost(int idEvent)
         {
-            Attendee = _eventService.GetAttendee(1);
-            ThisEvent = _eventService.GetEvents()
-                .Find(e => e.EventId == idEvent);
+            //Attendee = _eventService.GetAttendee(1);
+            //ThisEvent = _eventService.GetEvents()
+            //    .Find(e => e.EventId == idEvent);
 
 
             if (ThisEvent == null)
@@ -41,7 +41,7 @@ namespace EventiaWebapp.Pages.Events
             }
 
 
-            _eventService.AddEventToAttendee(1, idEvent); //Default userId, for exercise.
+            //_eventService.AddEventToAttendee(1, idEvent); //Default userId, for exercise.
             return Page();
 
         }

@@ -1,5 +1,6 @@
 using DataLayer.Backend;
 using DataLayer.Data;
+using DataLayer.Model;
 using EventiaWebapp.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,9 +25,11 @@ builder.Services.AddDbContext<EventiaDbContext>(options =>
 
 //Add Identity service
 
-//builder.Services.AddDefaultIdentity<identityUser>(
-//  options => options.SignIn.RequireConfirmedAccount = true)
-//  .AddEntityFrameworkStores<EventiaDbContext>();
+builder.Services.AddDefaultIdentity<EventiaUser>(
+ options => options.SignIn.RequireConfirmedAccount = true)
+  .AddEntityFrameworkStores<EventiaDbContext>();
+
+
 
 
 //Add Debugging

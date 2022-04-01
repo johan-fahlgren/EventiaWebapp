@@ -1,20 +1,21 @@
-﻿using EventiaWebapp.Models;
+﻿using DataLayer.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Data
 {
-    public class EventiaDbContext : IdentityDbContext
+    public class EventiaDbContext : IdentityDbContext<EventiaUser>
     {
-        public DbSet<Attendee>? Attendees { get; set; }
+        //public DbSet<Attendee>? Attendees { get; set; }
         public DbSet<Event?>? Events { get; set; }
-        public DbSet<Organizer>? Organizers { get; set; }
+        //public DbSet<Organizer>? Organizers { get; set; }
 
 
         public EventiaDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
 
         }
 

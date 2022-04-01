@@ -1,4 +1,4 @@
-using EventiaWebapp.Models;
+using DataLayer.Model;
 using EventiaWebapp.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,8 +18,8 @@ namespace EventiaWebapp.Pages
 
         public void OnGet()
         {
-            UserOneEvents = _eventService.UserEventsList(1);
-            Attendee = _eventService.GetAttendee(1);
+            // UserOneEvents = _eventService.UserEventsList(1);
+            // Attendee = _eventService.GetAttendee(1);
         }
     }
 }

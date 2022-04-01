@@ -1,6 +1,4 @@
 ﻿using DataLayer.Data;
-using EventiaWebapp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace EventiaWebapp.Services
 {
@@ -14,6 +12,8 @@ namespace EventiaWebapp.Services
         }
 
         //TODO(✓)  - A method that returns a list of all events.
+
+        /*
         public List<Event?> GetEvents()
         {
             var eventList = _context.Events
@@ -70,7 +70,7 @@ namespace EventiaWebapp.Services
                DateTime.Compare(date1.Date, date2.Date));
 
             return eventList;
-        }
+        }*/
 
 
 
