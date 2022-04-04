@@ -212,14 +212,14 @@ namespace DataLayer.Data
 
             /*Add roles to users*/
 
-            await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan
-                "administrator");
+            await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan, Administrator
+                $"{roles[0]}");
 
-            await _userManager.AddToRoleAsync(eventiaUser[1], //Pim
-                "organizer");
+            await _userManager.AddToRoleAsync(eventiaUser[1], //Pim, Organizer
+                $"{roles[1]}");
 
-            await _userManager.AddToRoleAsync(eventiaUser[2], //Morton
-                "user");
+            await _userManager.AddToRoleAsync(eventiaUser[2], //Morton, User
+                $"{roles[2]}");
 
 
 

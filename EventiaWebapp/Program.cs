@@ -32,7 +32,7 @@ builder.Services.AddDbContext<EventiaDbContext>(options =>
 builder.Services.AddDefaultIdentity<EventiaUser>(
  options =>
  {
-     options.SignIn.RequireConfirmedAccount = true;
+     options.SignIn.RequireConfirmedAccount = false;
 
  })
     .AddRoles<IdentityRole>()
@@ -53,6 +53,9 @@ if (builder.Environment.IsDevelopment())
 var app = builder.Build();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseStaticFiles();
 
@@ -82,6 +85,8 @@ using (var scope = app.Services.CreateScope())
     }
 
 }
+
+
 
 //PHASE 3  - Server started
 app.Run();

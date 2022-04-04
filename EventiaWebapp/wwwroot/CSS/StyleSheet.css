@@ -15,7 +15,7 @@
 /*_layout*/
 
 html {
-    background-color: #ffff;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
@@ -268,3 +268,11 @@ td {
     padding: 40px 0;
 }
 
+/*ERROR page*/
+
+
+.errorMsg {
+    color: red;
+    background-color: gold;
+    padding: 10px;
+}

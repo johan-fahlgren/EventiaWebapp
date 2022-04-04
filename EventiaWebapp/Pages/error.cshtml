@@ -1,20 +1,9 @@
-﻿@page 
+﻿@page "{errorMsg}"
 @model EventiaWebapp.Pages.errorModel
-@{
-}
+
 
 <div class="d-flex flex-column justify-content-center">
-<h1 class="text-center mt-5 mx-5">SOMETHING WENT WRONG PAGE</h1>
-<h5 class="text-center  mt-3 mx-5">OUR CODE SMURFS ARE HARD AT WORK TO SOLVE THIS, PLEASE HAVE PATIENCE AND TRY AGAIN. </h5>
-
-<h4 class="errorMsg text-center  mt-5 mx-5">@Model.ErrorMessage</h4>
+    <h1 class="text-center mt-5 mx-5">SOMETHING WENT WRONG PAGE</h1>
+    <h5 class="text-center  mt-3 mx-5">OUR CODE SMURFS ARE HARD AT WORK TO SOLVE THIS, PLEASE HAVE PATIENCE AND TRY AGAIN. </h5>
+    <h4 class="errorMsg text-center  mt-5 mx-5">@Model.ErrorMessage</h4>
 </div>
-
-<style>
-
-    .errorMsg {
-        color: red;
-        background-color: gold;
-        padding: 10px;
-    }
-</style>
