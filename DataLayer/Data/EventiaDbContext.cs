@@ -14,7 +14,20 @@ namespace DataLayer.Data
 
         public EventiaDbContext(DbContextOptions options) : base(options) { }
 
-        //protected void OnModelCreating(ModelBuilder modelBuilder){}
+        /*
+        protected void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.attendee)
+                .WithMany(e => Events)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.organizer)
+                .WithMany(o => Events)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
+        */
 
 
 

@@ -27,7 +27,7 @@ namespace DataLayer.Model
         public EventiaUser organizer { get; set; }
 
         [ForeignKey("EventiaUser")]
-        public ICollection<EventiaUser> attendee { get; set; }
+        public ICollection<EventiaUser>? attendee { get; set; }
 
 
     }

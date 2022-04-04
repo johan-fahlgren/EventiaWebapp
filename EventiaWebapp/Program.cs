@@ -74,6 +74,9 @@ using (var scope = app.Services.CreateScope())
 
     var admin = scope.ServiceProvider.GetService<Admin>();
     //Initiate database
+
+    await admin.RecreateAndSeedTestDatabase();
+
     if (app.Environment.IsProduction())
     {
         await admin.CreateDatabase();
