@@ -33,9 +33,10 @@
                     <a class="nav-link text-dark"
                        asp-page="/Admin">Admin</a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link " asp-page="/LogIn">Login</a>
-                </li>
+                    <a class="nav-link "asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </li>       
             </ul>
             
         </div>
@@ -54,6 +55,7 @@
 </footer>
 @RenderSection("Overview_style", required: false)
 @RenderSection("UpAndComing_Style", required: false)
+@RenderSection("Scripts", required: false)
 </body>
 
 </html>
