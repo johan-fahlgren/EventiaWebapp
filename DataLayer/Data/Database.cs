@@ -196,12 +196,13 @@ namespace DataLayer.Data
                 await _userManager.CreateAsync(user, password: "pAssw0rd!");
             };
 
+            /*Roles*/
 
             var roles = new List<IdentityRole>
             {
-                new() { Name = "user" },
+                new() { Name = "administrator"},
                 new() { Name = "organizer"},
-                new() { Name = "administrator"}
+                new() { Name = "user"}
             };
 
             foreach (var role in roles)
@@ -209,6 +210,16 @@ namespace DataLayer.Data
                 await _roleManager.CreateAsync(role);
             }
 
+            /*Add roles to users*/
+
+            await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan
+                "administrator");
+
+            await _userManager.AddToRoleAsync(eventiaUser[1], //Pim
+                "organizer");
+
+            await _userManager.AddToRoleAsync(eventiaUser[2], //Morton
+                "user");
 
 
 

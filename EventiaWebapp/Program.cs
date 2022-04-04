@@ -29,12 +29,14 @@ builder.Services.AddDbContext<EventiaDbContext>(options =>
 
 
 //Add Identity service
-builder.Services.AddIdentity<EventiaUser, IdentityRole>(
+builder.Services.AddDefaultIdentity<EventiaUser>(
  options =>
  {
      options.SignIn.RequireConfirmedAccount = true;
 
- }).AddEntityFrameworkStores<EventiaDbContext>();
+ })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<EventiaDbContext>();
 
 
 
