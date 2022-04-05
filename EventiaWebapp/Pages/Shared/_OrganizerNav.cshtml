@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using DataLayer.Model
+
+@inject SignInManager<EventiaUser> SignInManager
+@inject UserManager<EventiaUser> UserManager
+
+<ul class="navbar-nav">
+    <li class="nav-item">
+            <a class="nav-link" id="register" asp-page="/organizer/OrganizeEvents">Organize Events</a>
+        </li>
+        <p class="devider">|</p>
+    <li class="nav-item">
+        <a class="nav-link" id="login"  asp-page="/organizer/AddEvent">Add Event</a>
+    </li>
+    <p class="devider">|</p>
+</ul>

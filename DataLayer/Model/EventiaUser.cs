@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Model
 {
@@ -10,12 +9,10 @@ namespace DataLayer.Model
         public string? LastName { get; set; }
 
 
-        [InverseProperty("organizer")]
+
         public ICollection<Event>? HostedEvent { get; set; }
 
 
-        [InverseProperty("attendee")]
-        [ForeignKey("Event")]
         public ICollection<Event>? JoinedEvent { get; set; }
     }
 }

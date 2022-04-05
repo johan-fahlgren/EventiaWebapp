@@ -1,4 +1,6 @@
 ﻿using DataLayer.Data;
+using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventiaWebapp.Services
 {
@@ -13,66 +15,69 @@ namespace EventiaWebapp.Services
 
         //TODO(✓)  - A method that returns a list of all events.
 
-        /*
-        public List<Event?> GetEvents()
+        public async Task<List<Event?>> GetEvents()
         {
-            var eventList = _context.Events
-                .Include(e => e.Organizer)
-                .ToList();
+            var eventList = await _context.Events
+                .Include(e => e.organizer)
+                .ToListAsync();
 
             return eventList;
+        }
 
+        public async Task<Event?> GetThisEvent(int eventId)
+        {
+            var thisEvent = await _context.Events
+                .Include(e => e.organizer)
+                .FirstOrDefaultAsync(e => e.EventId == eventId);
+
+            return thisEvent;
         }
 
 
+
         //TODO(✓)  - A method that returns a default Attendee object (always the same object for exercise).
-        public Attendee GetAttendee(int userId)
+        public async Task<EventiaUser?> GetUser(string userId)
         {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(a => a.Id == userId);
 
-            var attendee = _context.Attendees
-               .FirstOrDefault(a => a.AttendeeId == userId);
-
-            return (attendee ?? null) ?? throw new InvalidOperationException();
-
+            return user;
         }
 
 
         //TODO(✓)  - A method that adds a event object to a attendee object.
-        public void AddEventToAttendee(int userId, int eventId)
+        public async Task<bool> AddEventToAttendee(string userId, int eventId)
         {
-            var attendee = _context.Attendees
-                .Include(a => a.Events)
-                .FirstOrDefault(a => a.AttendeeId == userId);
+            var user = await _context.Users
+                .Include(u => u.JoinedEvent)
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var thisEvent = _context.Events
-                .FirstOrDefault(e => e.EventId == eventId);
+            var thisEvent = await _context.Events
+                .FirstOrDefaultAsync(e => e.EventId == eventId);
 
+            if (user is null || thisEvent is null) return false;
 
-            attendee.Events.Add(thisEvent);
-            _context.SaveChanges();
-
+            user.JoinedEvent.Add(thisEvent);
+            await _context.SaveChangesAsync();
+            return true;
 
         }
 
 
         //TODO(✓)  - A method that returns a list of all events for one Attendee object. 
-        public List<Event> UserEventsList(int userId)
+        public async Task<List<Event>> UserEventsList(string userId)
         {
-            userId = 1;  //default userId
+            var user = await _context.Users
+                .Include(u => u.JoinedEvent)
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var attendee = _context.Attendees
-                .Include(a => a.Events)
-                .FirstOrDefault(a => a.AttendeeId == userId);
-
-            var eventList = attendee.Events.ToList();
+            var eventList = user.JoinedEvent.ToList();
 
             eventList.Sort((date1, date2) =>
                DateTime.Compare(date1.Date, date2.Date));
 
             return eventList;
-        }*/
-
-
+        }
 
     }
 

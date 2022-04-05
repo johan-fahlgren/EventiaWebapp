@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Model
@@ -23,10 +24,13 @@ namespace DataLayer.Model
         public string EventImg { get; set; }
 
 
-        [ForeignKey("EventiaUser")]
+
+        [InverseProperty("HostedEvent")]
+        [DisplayName("Organizer")]
         public EventiaUser organizer { get; set; }
 
-        [ForeignKey("EventiaUser")]
+
+        [InverseProperty("JoinedEvent")]
         public ICollection<EventiaUser>? attendee { get; set; }
 
 

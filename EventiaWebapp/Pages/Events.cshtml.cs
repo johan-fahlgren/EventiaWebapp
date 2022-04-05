@@ -15,9 +15,9 @@ namespace EventiaWebapp.Pages
             _eventService = eventService;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            //EventList = _eventService.GetEvents();
+            EventList = await _eventService.GetEvents();
 
         }
 

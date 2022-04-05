@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Cryptography.X509Certificates
+@using DataLayer.Model
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<EventiaUser> _signInManager
+@inject UserManager<EventiaUser> _userManager
+
+@{
+    EventiaUser? eventiaUser = await _userManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,18 +33,33 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-page="/Events">Events</a>
                 </li>
-                <p class="devider">|</p>
-                <li class="nav-item">
-                    <a class="nav-link" asp-page="/MyEvents">My Events</a>
-                </li>
+                @if (_signInManager.IsSignedIn(User))
+                {
+                    <p class="devider">|</p>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/MyEvents">My Events</a>
+                    </li>
+                }
             </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                       asp-page="/Admin">Admin</a>
-                </li>
-                <partial name="_LoginPartial"/>
-            </ul>
+             @if (_signInManager.IsSignedIn(User))
+             {
+                 <li class="userName">~ @_userManager.GetUserName(User) ~</li>
+                 
+             }
+             <ul class="navbar-nav">
+                 @if (_signInManager.IsSignedIn(User))
+                 {
+                     @if (await _userManager.IsInRoleAsync(eventiaUser, "organizer"))
+                     {
+                         <partial name="_OrganizerNav"/>
+                     }
+                     @if (await _userManager.IsInRoleAsync(eventiaUser, "administrator"))
+                     {
+                         <partial name="_AdminNav"/>
+                     }
+                 }
+                 <partial name="_LoginPartial"/>
+             </ul>
             
         </div>
     </nav>
@@ -46,9 +71,7 @@
 </main>
 
 <footer>
-    <div class="footer-div">
     <p> Eventia &copy; </p>
-    </div>
 </footer>
 @RenderSection("Overview_style", required: false)
 @RenderSection("UpAndComing_Style", required: false)

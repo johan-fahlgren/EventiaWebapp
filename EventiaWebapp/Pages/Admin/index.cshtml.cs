@@ -1,14 +1,13 @@
-using DataLayer.Backend;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EventiaWebapp.Pages.Shared
+namespace EventiaWebapp.Pages.Admin
 {
-    public class AdminModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly Admin _admin;
+        private readonly DataLayer.Backend.Admin _admin;
 
-        public AdminModel(Admin admin)
+        public IndexModel(DataLayer.Backend.Admin admin)
         {
             _admin = admin;
         }

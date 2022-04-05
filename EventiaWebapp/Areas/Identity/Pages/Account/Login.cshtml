@@ -14,9 +14,9 @@
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating mt-4">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Input.Email" class="form-label"></label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Username" class="form-label"></label>
+                    <span asp-validation-for="Input.Username" class="text-danger"></span>
                 </div>
                 <div class="form-floating mt-4">
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
@@ -48,6 +48,14 @@
             </form>
         </section>
     </div>
+</div>
+
+<div class="text-center mt-5">
+    <h5>Admin: Felhan</h5>
+    <h5>User: Pim</h5>
+    <h5>Organizer: WorldTours</h5>
+
+    <h5>Password: pAssw0rd!</h5>
 </div>
 
 @section Scripts {

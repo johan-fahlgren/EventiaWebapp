@@ -60,7 +60,7 @@ li {
 }
 
 .nav-div {
-    width: 750px;
+    width: 100%;
     margin: auto;
 }
 
@@ -69,21 +69,25 @@ li {
     font-size: 1.4rem;
 }
 
+.userName {
+    color: rgba(255,255,255,.55);
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    text-decoration: none;
+    list-style: none;
+}
+
 
 footer {
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     width: 100%;
+    margin: auto;
     padding: 10px 0px;
     background-color: #212529;
 }
 
-.footer-div {
-    margin: auto;
-    width: 800px;
-}
-
-.footer-div > p {
+footer > p {
     color: white;
     text-align: center;
     margin: 0 40px;

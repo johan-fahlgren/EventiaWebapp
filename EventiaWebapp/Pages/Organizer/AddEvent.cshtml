@@ -1,0 +1,75 @@
+﻿@page
+@model EventiaWebapp.Pages.Organizer.AddEventModel
+@{
+}
+
+
+<div class="d-flex justify-content-center">
+    <div class="flex-column">
+        <form method="post">
+        <h2 class="display-5 my-4">Create a new event</h2>
+            <hr />
+            @*Titel*@
+            <div class="d-flex flex-row align-items-center my-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.Titel" placeholder="Titel"/>
+                    <label class="form-label" asp-for="Input.Titel"></label>
+                    <span asp-validation-for="Input.Titel"></span>
+                </div>
+            </div>
+            @*Description*@
+            <div class="d-flex flex-row align-items-center mb-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.Description" placeholder="Description"/>
+                    <label class="form-label" asp-for="Input.Description"></label>
+                    <span asp-validation-for="Input.Description"></span>
+                </div>
+            </div>
+            @*Place*@
+            <div class="d-flex flex-row align-items-center mb-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.Place" placeholder="Place"/>
+                    <label class="form-label" asp-for="Input.Place"></label>
+                    <span asp-validation-for="Input.Place"></span>
+                </div>
+            </div>
+            @*Address*@
+            <div class="d-flex flex-row align-items-center mb-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.Address" placeholder="Address"/>
+                    <label class="form-label" asp-for="Input.Address"></label>
+                    <span asp-validation-for="Input.Address"></span>
+                </div>
+            </div>
+            @*Date*@
+            <div class="d-flex flex-row align-items-center mb-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.Date" placeholder="Date"/>
+                    <label class="form-label" asp-for="Input.Date"></label>
+                    <span asp-validation-for="Input.Date"></span>
+                </div>
+            </div>
+            @*Spots*@
+            <div class="d-flex flex-row align-items-center mb-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.SpotsAvailable" placeholder="Spots Available"/>
+                    <label class="form-label" asp-for="Input.SpotsAvailable"></label>
+                    <span asp-validation-for="Input.SpotsAvailable"></span>
+                </div>
+            </div>
+            @*Image*@
+            <div class="d-flex flex-row align-items-center mb-4">
+                <div class="form-floating flex-fill mb-0">
+                    <input class="form-control flex-fill mb-0" asp-for="Input.EventImg" placeholder="Event image"/>
+                    <label class="form-label" asp-for="Input.EventImg"></label>
+                    <span asp-validation-for="Input.EventImg"></span>
+                </div>
+            </div>
+            @*Submit*@
+            <input class="btn btn-dark" type="submit"></input>
+        </form>
+    </div>
+</div>
+
+
+

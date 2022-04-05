@@ -44,23 +44,42 @@ namespace DataLayer.Data
 
         public async Task SeedTestDataBase()
         {
-            /*   
-            var organizers = new List<Organizer>
+
+            var eventiaOrganizers = new List<EventiaUser>
             {
-                new () {Name= "World Tours.inc", Email = "info@worldtours.com", Phone_Number = "0220-12345"},
-                new () {Name = "Experience", Email = "info@experience.com", Phone_Number = "0400-12345"},
-                new () {Name = "Axelssons & c/o", Email = "info@axelsson.com", Phone_Number = "088-12345"}
+                new ()
+                {
+                    UserName = "WorldTours",
+                    Email = "info@worldtours.com",
+                    PhoneNumber = "0220-12345"
+                },
+                new ()
+                {
+                    UserName = "Experience",
+                    Email = "info@experience.com",
+                    PhoneNumber = "0400-12345"
+                },
+                new ()
+                {
+                    UserName = "Axelssons",
+                    Email = "info@axelsson.com",
+                    PhoneNumber = "088-12345",
+                }
 
             };
 
-            await _context.AddRangeAsync(organizers);
-            */
+            foreach (var organizer in eventiaOrganizers)
+            {
+                await _userManager.CreateAsync(organizer, password: "pAssw0rd!");
+            };
+
 
             var events = new List<Event>
             {
                 new()
                 {
                     Titel = "Ghost",
+                    organizer = eventiaOrganizers[0],
                     Description =
                         "Ghost klassas idag som ett av världens mest älskade metalband!" +
                         " De är hyllade, prisbelönta och har alltid utmanat och skapat rubriker." +
@@ -76,6 +95,7 @@ namespace DataLayer.Data
                 new ()
                 {
                     Titel = "TOOL",
+                    organizer = eventiaOrganizers[0],
                     Description =
                         "TOOL TILLBAKA TILL SVERIGE FÖR FÖRSTA GÅNGEN PÅ FEMTON ÅR!" +
                         "Femton år har gått sedan bandet senast spelade på svensk mark" +
@@ -94,6 +114,7 @@ namespace DataLayer.Data
                 new ()
                 {
                     Titel = "Frida Hyvönen",
+                    organizer = eventiaOrganizers[1],
                     Description =
                         "Med det senaste vida hyllade albumet ”Dream of Independence” i ryggen ger" +
                         " sig Frida Hyvönen ut på en omfattande vårturné som inleds 25 februari i Luleå." +
@@ -109,6 +130,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Humorkväll med Jonathan Unge & Ahmed Berhan",
+                    organizer = eventiaOrganizers[1],
                     Description =
                         "Nu blir det humor på hög nivå inne på salongen på Kungsbacka Teater." +
                         "Jonatan Unge är den anemiska kulturpojken från Djurgården som trots reumatism" +
@@ -124,6 +146,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "Alla känner Ankan",
+                    organizer = eventiaOrganizers[2],
                     Description =
                         "Anders ”Ankan” Johansson utsågs 2020 till årets manliga komiker och samma år gjorde" +
                         " han stor succé i tv-program som ”Bäst i test” och ”På spåret på SVT”. Anders är för" +
@@ -139,6 +162,7 @@ namespace DataLayer.Data
                 new()
                 {
                     Titel = "En afton på Operan",
+                    organizer = eventiaOrganizers[2],
                     Description =
                         "Var med och hör framtidens operasångare i början av sin karriär," +
                         " på väg ut i den internationella operavärlden. Tillsammans med dirigent" +
@@ -215,14 +239,22 @@ namespace DataLayer.Data
             await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan, Administrator
                 $"{roles[0]}");
 
-            await _userManager.AddToRoleAsync(eventiaUser[1], //Pim, Organizer
-                $"{roles[1]}");
+            await _userManager.AddToRoleAsync(eventiaUser[1], //Pim, User
+                $"{roles[2]}");
 
             await _userManager.AddToRoleAsync(eventiaUser[2], //Morton, User
                 $"{roles[2]}");
 
+            /*Add roles to organizers*/
 
+            await _userManager.AddToRoleAsync(eventiaOrganizers[0], //World Tours, Organizer
+                $"{roles[1]}");
 
+            await _userManager.AddToRoleAsync(eventiaOrganizers[1], //Experience , Organizer
+                $"{roles[1]}");
+
+            await _userManager.AddToRoleAsync(eventiaOrganizers[2], //Axelssons , Organizer
+                $"{roles[1]}");
 
         }
 

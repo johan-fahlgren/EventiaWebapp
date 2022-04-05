@@ -1,5 +1,6 @@
 using DataLayer.Model;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,30 +9,39 @@ namespace EventiaWebapp.Pages.Events
     public class ConfirmationModel : PageModel
     {
         private readonly EventService _eventService;
+        private readonly UserManager<EventiaUser> _userManager;
+
         public Event? ThisEvent { get; set; }
-        public Attendee Attendee { get; set; }
+        public EventiaUser EventiaUser { get; set; }
         private readonly ILogger<ConfirmationModel> _logger;
 
 
-        public ConfirmationModel(ILogger<ConfirmationModel> logger, EventService eventService)
+        public ConfirmationModel(
+            ILogger<ConfirmationModel> logger,
+            EventService eventService,
+            UserManager<EventiaUser> userManager)
         {
             _eventService = eventService;
             _logger = logger;
+            _userManager = userManager;
         }
 
-        public void OnGet(int eventId)
+        public async void OnGet(int eventId)
         {
-            //Attendee = _eventService.GetAttendee(1);
+            var userId = _userManager.GetUserId(User);
 
-            //ThisEvent = _eventService.GetEvents()
-            //.Find(e => e.EventId == eventId);
+            EventiaUser = await _eventService.GetUser(userId);
+
+            ThisEvent = await _eventService.GetThisEvent(eventId);
         }
 
-        public IActionResult OnPost(int idEvent)
+        public async Task<IActionResult> OnPost(int idEvent)
         {
-            //Attendee = _eventService.GetAttendee(1);
-            //ThisEvent = _eventService.GetEvents()
-            //    .Find(e => e.EventId == idEvent);
+            var userId = _userManager.GetUserId(User);
+
+            EventiaUser = await _eventService.GetUser(userId);
+
+            ThisEvent = await _eventService.GetThisEvent(idEvent);
 
 
             if (ThisEvent == null)
@@ -41,7 +51,7 @@ namespace EventiaWebapp.Pages.Events
             }
 
 
-            //_eventService.AddEventToAttendee(1, idEvent); //Default userId, for exercise.
+            _eventService.AddEventToAttendee(userId, idEvent);
             return Page();
 
         }
