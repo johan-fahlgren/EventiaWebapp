@@ -20,7 +20,7 @@ namespace EventiaWebapp.Pages.Admin
         public async Task<IActionResult> OnPost()
         {
 
-            await _admin.RecreateAndSeedTestDatabase();
+            await _admin.RecreateAndSeedTestDatabase(); //TODO - Resetting database reseeds Admin and Cookie persists. site crash :O! 
             return Page();
         }
     }
