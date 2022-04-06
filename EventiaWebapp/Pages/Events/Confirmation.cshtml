@@ -1,11 +1,14 @@
 ﻿@page "{eventId}"
+@using DataLayer.Model
+@using Microsoft.AspNetCore.Identity
 @model EventiaWebapp.Pages.Events.ConfirmationModel
+@inject SignInManager<EventiaUser> _signInManager
 @{
 }
 
 <div class="card" style="width: 45rem;">
     <div class="card-header">
-        <b>@Model.ThisEvent.Place</b> presenterar stolt
+        <b>@Model.ThisEvent.Titel</b> presenterar stolt
     </div>
     <div class="card-top">
         <img src="@Model.ThisEvent.EventImg" class="event-img card-img-top">
@@ -16,13 +19,27 @@
             <b>Seats available:</b> @Model.ThisEvent.Spots_Available <br/> 
             <b>Address:</b> @Model.ThisEvent.Address </p>
         <div class="d-flex justify-content-center">
-            <form method="post" asp-route-idEvent="@Model.ThisEvent.EventId">
-                <button type="submit" class="btn btn-lg btn-dark">Join event</button>
-            </form>
+            @if (_signInManager.IsSignedIn(User))
+            {
+                <form method="post" asp-route-idEvent="@Model.ThisEvent.EventId">
+                    <button type="submit" class="btn btn-lg btn-dark">Join event</button>
+                </form>
+            }
+            else
+            {
+                <form class="flex-column my-4">
+                <p>Want to join this even?</p>
+                    <div class="notLoggedinButtons">
+                        <button class="btn btn-lg btn-dark" asp-area="Identity" asp-page="/Account/Register">Register</button>
+                        <button class="btn btn-lg btn-dark" asp-area="Identity" asp-page="/Account/Login" >Login</button>
+                    </div>
+                </form>
+            }
+            
         </div>
     </div>
     <div class="card-footer">
-        @Model.ThisEvent.Date.ToShortDateString() - @Model.ThisEvent.Date.ToShortTimeString() &emsp;|&emsp; @Model.ThisEvent.Place &emsp;|&emsp; @@Model.ThisEvent.Organizer.Name@@
+        @Model.ThisEvent.Date.ToShortDateString() - @Model.ThisEvent.Date.ToShortTimeString() &emsp;|&emsp; @Model.ThisEvent.Place &emsp;|&emsp; @Model.ThisEvent.organizer.UserName
     </div>
 </div>
 

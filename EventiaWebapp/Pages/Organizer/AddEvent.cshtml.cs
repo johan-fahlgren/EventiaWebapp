@@ -1,5 +1,5 @@
-using DataLayer.Data;
 using DataLayer.Model;
+using EventiaWebapp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +13,16 @@ namespace EventiaWebapp.Pages.Organizer
     {
 
         private readonly UserManager<EventiaUser> _userManager;
-        private readonly EventiaDbContext _dbContext;
+        private readonly OrganizerService _organizerService;
 
-        public AddEventModel(UserManager<EventiaUser> userManager, EventiaDbContext dbContext)
+        public AddEventModel(UserManager<EventiaUser> userManager, OrganizerService organizerService)
         {
             _userManager = userManager;
-            _dbContext = dbContext;
+            _organizerService = organizerService;
         }
 
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty(SupportsGet = true)] //TODO - "SupportGet" necessary?
         public InputModel Input { get; set; }
 
         public class InputModel
@@ -91,8 +91,7 @@ namespace EventiaWebapp.Pages.Organizer
                 EventImg = ""
             };
 
-            var result = await _dbContext.AddAsync(newEvent);
-            await _dbContext.SaveChangesAsync();
+            await _organizerService.AddEvent(newEvent);
 
             return Page(); //quick fix :)
         }

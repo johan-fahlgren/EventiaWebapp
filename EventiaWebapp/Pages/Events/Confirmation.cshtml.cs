@@ -26,7 +26,7 @@ namespace EventiaWebapp.Pages.Events
             _userManager = userManager;
         }
 
-        public async void OnGet(int eventId)
+        public async Task OnGet(int eventId)
         {
             var userId = _userManager.GetUserId(User);
 
@@ -46,7 +46,7 @@ namespace EventiaWebapp.Pages.Events
 
             if (ThisEvent == null)
             {
-                _logger.LogError("Missing event info, try again");
+                _logger.LogError("Try get Event info missing");
                 return RedirectToPage("../error", new { errorMsg = "Missing event info, please try again" });
             }
 
