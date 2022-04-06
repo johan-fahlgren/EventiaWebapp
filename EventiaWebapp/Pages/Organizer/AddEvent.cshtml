@@ -20,7 +20,7 @@
             @*Description*@
             <div class="d-flex flex-row align-items-center mb-4">
                 <div class="form-floating flex-fill mb-0">
-                    <input class="form-control flex-fill mb-0" asp-for="Input.Description" placeholder="Description"/>
+                    <textarea class="form-control flex-fill mb-0" asp-for="Input.Description" placeholder="Description"></textarea>
                     <label class="form-label" asp-for="Input.Description"></label>
                     <span asp-validation-for="Input.Description"></span>
                 </div>
@@ -58,13 +58,8 @@
                 </div>
             </div>
             @*Image*@
-            <div class="d-flex flex-row align-items-center mb-4">
-                <div class="form-floating flex-fill mb-0">
-                    <input class="form-control flex-fill mb-0" asp-for="Input.EventImg" placeholder="Event image"/>
-                    <label class="form-label" asp-for="Input.EventImg"></label>
-                    <span asp-validation-for="Input.EventImg"></span>
-                </div>
-            </div>
+            @*<input class="form-control flex-fill h-100 mb-1" type="file" asp-for="Input.EventImg" placeholder="Event image"/>
+            <p class="mb-4" style="font-size: 0.8rem" >Recommended minimum event image size 600x400px</p>*@
             @*Submit*@
             <input class="btn btn-dark" type="submit"></input>
         </form>

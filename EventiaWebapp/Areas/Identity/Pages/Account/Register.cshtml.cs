@@ -62,6 +62,10 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [DataType("bool")]
+            [Display(Name = "Organizer?")]
+            public bool OrganizerCheckbox { get; set; }
         }
 
 

@@ -44,7 +44,7 @@
              @if (_signInManager.IsSignedIn(User))
              {
                  <li class="userName">~ @_userManager.GetUserName(User) ~</li>
-                 
+
              }
              <ul class="navbar-nav">
                  @if (_signInManager.IsSignedIn(User))
@@ -73,9 +73,9 @@
 <footer>
     <p> Eventia &copy; </p>
 </footer>
-@RenderSection("Overview_style", required: false)
-@RenderSection("UpAndComing_Style", required: false)
-@RenderSection("Scripts", required: false)
+@await RenderSectionAsync("Overview_style", required: false)
+@await RenderSectionAsync("UpAndComing_Style", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

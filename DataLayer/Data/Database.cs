@@ -234,6 +234,7 @@ namespace DataLayer.Data
                 await _roleManager.CreateAsync(role);
             }
 
+
             /*Add roles to users*/
 
             await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan, Administrator

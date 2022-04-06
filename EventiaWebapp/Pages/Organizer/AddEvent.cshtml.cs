@@ -1,12 +1,29 @@
+using DataLayer.Data;
+using DataLayer.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
 namespace EventiaWebapp.Pages.Organizer
 {
+    [Authorize(Roles = "organizer")]
     public class AddEventModel : PageModel
     {
 
-        public InputModel Input;
+        private readonly UserManager<EventiaUser> _userManager;
+        private readonly EventiaDbContext _dbContext;
+
+        public AddEventModel(UserManager<EventiaUser> userManager, EventiaDbContext dbContext)
+        {
+            _userManager = userManager;
+            _dbContext = dbContext;
+        }
+
+
+        [BindProperty(SupportsGet = true)]
+        public InputModel Input { get; set; }
 
         public class InputModel
         {
@@ -17,7 +34,7 @@ namespace EventiaWebapp.Pages.Organizer
             public string Titel { get; set; }
 
             [Required]
-            [DataType(DataType.MultilineText)] //TODO - won't show as "<textarea>"
+            [DataType(DataType.MultilineText)] //TODO(done) - won't show as "<textarea>"
             [Display(Name = "Description")]
             public string Description { get; set; }
 
@@ -41,14 +58,43 @@ namespace EventiaWebapp.Pages.Organizer
             [Display(Name = "Spots Available")]
             public int SpotsAvailable { get; set; }
 
-            [DataType(DataType.Upload)]
+            /* //TODO - upload file and set img url
+            [DataType(DataType.Upload)] 
             [Display(Name = "Event image")]
-            public string EventImg { get; set; } //TODO - upload file and set img url
+            public IFormFile EventImg { get; set; } 
+            */
 
         }
 
+
         public void OnGet()
         {
+        }
+
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+            if (!ModelState.IsValid) return Page();
+
+            var user = await _userManager.GetUserAsync(User);
+
+            var newEvent = new Event
+            {
+                Titel = Input.Titel,
+                organizer = user,
+                Description = Input.Description,
+                Place = Input.Place,
+                Address = Input.Address,
+                Date = Input.Date,
+                Spots_Available = Input.SpotsAvailable,
+                EventImg = ""
+            };
+
+            var result = await _dbContext.AddAsync(newEvent);
+            await _dbContext.SaveChangesAsync();
+
+            return Page(); //quick fix :)
         }
     }
 }
