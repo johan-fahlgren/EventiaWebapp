@@ -20,6 +20,7 @@ builder.Services.AddScoped<Database>();
 //Add EnventHandler as service
 builder.Services.AddScoped<EventService>();
 builder.Services.AddScoped<OrganizerService>();
+builder.Services.AddScoped<AdminService>();
 
 //Add database as service
 builder.Services.AddDbContext<EventiaDbContext>(options =>
