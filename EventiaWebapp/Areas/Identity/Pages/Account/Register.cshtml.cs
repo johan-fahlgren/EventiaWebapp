@@ -86,9 +86,8 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                //var user = new EventiaUser();
 
-                if (Input.OrganizerCheckbox is false)
+                if (Input.OrganizerCheckbox is false) //TODO Can this be less code?
                 {
                     NewUser = new EventiaUser()
                     {
@@ -110,19 +109,19 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
 
 
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var result = await _userManager.CreateAsync(NewUser, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, "user");
+                    await _userManager.AddToRoleAsync(NewUser, "user");
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var userId = await _userManager.GetUserIdAsync(NewUser);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(NewUser);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(NewUser, isPersistent: false);
                     return LocalRedirect(returnUrl);
 
                 }
