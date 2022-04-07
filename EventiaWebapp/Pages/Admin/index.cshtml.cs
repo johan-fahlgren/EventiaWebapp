@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages.Admin
 {
+    [Authorize(Roles = "administrator")]
     public class IndexModel : PageModel
     {
         private readonly DataLayer.Backend.Admin _admin;

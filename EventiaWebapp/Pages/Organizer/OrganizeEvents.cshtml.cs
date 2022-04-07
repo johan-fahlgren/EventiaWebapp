@@ -1,10 +1,12 @@
 using DataLayer.Model;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages.Organizer
 {
+    [Authorize(Roles = "organizer")]
     public class OrganizeEventsModel : PageModel
     {
         private readonly OrganizerService _organizerService;

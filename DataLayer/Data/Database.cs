@@ -210,15 +210,19 @@ namespace DataLayer.Data
                     LastName = "Hjalmarson",
                     UserName = "Morten",
                     Email = "annamartahjalmarson@gmail.com",
-                    JoinedEvent = annaMartasEvents
+                    JoinedEvent = annaMartasEvents,
+                    Application = new RoleApplication()
                 }
-            };
+    };
 
 
             foreach (var user in eventiaUser)
             {
                 await _userManager.CreateAsync(user, password: "pAssw0rd!");
             };
+
+            /*await _context.RoleApplications.AddAsync(new RoleApplication { Applicants = new List<EventiaUser> { eventiaUser[2] } }); */ // Unnecceary :(
+
 
             /*Roles*/
 
@@ -237,25 +241,37 @@ namespace DataLayer.Data
 
             /*Add roles to users*/
 
-            await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan, Administrator
-                $"{roles[0]}");
+            await _userManager.AddToRoleAsync(eventiaUser[0], //Felhan, User
+                        $"{roles[2]}");
 
             await _userManager.AddToRoleAsync(eventiaUser[1], //Pim, User
-                $"{roles[2]}");
+                        $"{roles[2]}");
 
             await _userManager.AddToRoleAsync(eventiaUser[2], //Morton, User
-                $"{roles[2]}");
+                        $"{roles[2]}");
 
             /*Add roles to organizers*/
 
             await _userManager.AddToRoleAsync(eventiaOrganizers[0], //World Tours, Organizer
-                $"{roles[1]}");
+                        $"{roles[1]}");
 
             await _userManager.AddToRoleAsync(eventiaOrganizers[1], //Experience , Organizer
-                $"{roles[1]}");
+                        $"{roles[1]}");
 
             await _userManager.AddToRoleAsync(eventiaOrganizers[2], //Axelssons , Organizer
-                $"{roles[1]}");
+                        $"{roles[1]}");
+
+        }
+
+        public async Task AdminSeed()
+        {
+            var adminUser = new EventiaUser
+            { UserName = "Admin", Email = "admin@eventia.com" };
+
+            await _userManager.CreateAsync(adminUser, password: "pAssw0rd!");
+
+            await _userManager.AddToRoleAsync(adminUser,
+                "administrator");
 
         }
 

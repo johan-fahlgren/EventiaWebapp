@@ -1,8 +1,11 @@
+using DataLayer.Model;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages.Admin
 {
+    [Authorize(Roles = "administrator")]
     public class ManageUsersModel : PageModel
     {
 
@@ -18,12 +21,15 @@ namespace EventiaWebapp.Pages.Admin
         public List<AdminService.userRoles> UserList
         { get; set; }
 
+        public List<EventiaUser> ApplicantList
+        { get; set; }
+
 
         public async Task OnGet()
         {
 
             UserList = await _adminService.GetUsers();
-
+            ApplicantList = await _adminService.GetApplicants();
 
         }
     }

@@ -20,11 +20,17 @@ namespace DataLayer.Backend
         {
             await _database.RecreateDatabase();
             await _database.SeedTestDataBase();
+            await _database.AdminSeed();
         }
 
         public async Task createDatabaseIfNotExists()
         {
             await _database.CreateAndSeedIfDatabaseDontExists();
+        }
+
+        public async Task AdminSeed()
+        {
+            await _database.AdminSeed();
         }
 
 

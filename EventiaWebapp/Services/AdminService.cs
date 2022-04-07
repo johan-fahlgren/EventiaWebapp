@@ -1,4 +1,5 @@
-﻿using DataLayer.Model;
+﻿using DataLayer.Data;
+using DataLayer.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,11 +8,13 @@ namespace EventiaWebapp.Services
     public class AdminService
     {
         private readonly UserManager<EventiaUser> _userManager;
+        private readonly EventiaDbContext _eventiaDbContext;
 
 
-        public AdminService(UserManager<EventiaUser> userManager)
+        public AdminService(UserManager<EventiaUser> userManager, EventiaDbContext eventiaDbContext)
         {
             _userManager = userManager;
+            _eventiaDbContext = eventiaDbContext;
         }
 
 
@@ -50,6 +53,20 @@ namespace EventiaWebapp.Services
         private async Task<List<String>> GetUserRoleAsync(EventiaUser user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
+        }
+
+
+        public async Task<List<EventiaUser>> GetApplicants()
+        {
+            var applicantsList = await _userManager.Users
+                .Include(u => u.Application)
+                .Where(u => u.Application != null)
+                .ToListAsync();
+
+
+            return applicantsList;
+
+
         }
 
 

@@ -7,6 +7,8 @@ namespace DataLayer.Model
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
+        public RoleApplication? Application { get; set; }
+
         public ICollection<Event>? HostedEvent { get; set; }
 
         public ICollection<Event>? JoinedEvent { get; set; }

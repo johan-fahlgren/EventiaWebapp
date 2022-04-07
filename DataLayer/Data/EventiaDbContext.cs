@@ -8,6 +8,7 @@ namespace DataLayer.Data
     public class EventiaDbContext : IdentityDbContext<EventiaUser, IdentityRole, string>
     {
         public DbSet<Event?> Events { get; set; }
+        public DbSet<RoleApplication> RoleApplications { get; set; }
 
         public EventiaDbContext(DbContextOptions options) : base(options) { }
 
