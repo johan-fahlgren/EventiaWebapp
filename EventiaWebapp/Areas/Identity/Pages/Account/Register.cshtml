@@ -1,5 +1,6 @@
 ﻿@page
 @using System.Data
+@using NuGet.Protocol
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -34,15 +35,9 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-check mt-2">
-                <input class="form-check-input" asp-for="Input.OrganizerCheckbox" name="OrganizerCheckbox" id="OrganizerCheckbox">
+                <input class="form-check-input" asp-for="Input.OrganizerCheckbox" name="Input.OrganizerCheckbox"  id="Input.OrganizerCheckbox">
                 <label class="form-check-label" asp-for="Input.OrganizerCheckbox"></label>
             </div>
-            @*@if(Model.Input.OrganizerCheckbox != false )
-            {
-                <h1>HEJ</h1>
-            }*@
-            
-            
             
             
 

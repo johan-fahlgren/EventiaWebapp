@@ -41,6 +41,8 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
+        public EventiaUser NewUser { get; set; }
+
         public class InputModel
         {
 
@@ -77,17 +79,36 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
 
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
             returnUrl ??= Url.Content("~/");
 
+
             if (ModelState.IsValid)
             {
-                var user = new EventiaUser
+                //var user = new EventiaUser();
+
+                if (Input.OrganizerCheckbox is false)
                 {
-                    UserName = Input.UserName,
-                    Email = Input.Email
-                };
+                    NewUser = new EventiaUser()
+                    {
+                        UserName = Input.UserName,
+                        Email = Input.Email,
+                        Application = null
+                    };
+                }
+                else
+                {
+                    NewUser = new EventiaUser()
+                    {
+                        UserName = Input.UserName,
+                        Email = Input.Email,
+                        Application = new RoleApplication()
+                    };
+                }
+
+
+
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
