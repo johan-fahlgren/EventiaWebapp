@@ -2,6 +2,8 @@ using DataLayer.Backend;
 using DataLayer.Data;
 using DataLayer.Model;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,7 +43,22 @@ builder.Services.AddDefaultIdentity<EventiaUser>(
     .AddEntityFrameworkStores<EventiaDbContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>
-    options.AccessDeniedPath = "/AccessDenied");
+{
+    options.AccessDeniedPath = "/AccessDenied";
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.LoginPath = ("/Identity/Account/Login");
+    options.ReturnUrlParameter =
+        CookieAuthenticationDefaults.ReturnUrlParameter;
+    options.SlidingExpiration = true;
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
 
 
 //Add Debugging

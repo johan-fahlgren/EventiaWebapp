@@ -1,10 +1,12 @@
 using DataLayer.Model;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages
 {
+    [AllowAnonymous]
     public class EventsModel : PageModel
     {
         private readonly EventService _eventService;
