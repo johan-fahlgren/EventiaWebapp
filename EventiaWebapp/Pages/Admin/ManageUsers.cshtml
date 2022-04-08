@@ -36,30 +36,35 @@
 </table>
 
 
-<h3 class="display-6 text-start" style="padding: 20px 0 10px 0">PENDING ORGANIZER APPLICANTS</h3>
 
-<table class="table table-dark table-hover">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Username</th> @*TODO sort onClick*@
-        <th scope="col">Email</th>
-        <th scope="col">Roles</th>
-        
-    </tr>
-    </thead>
-    <tbody>
-    @for (int i = 0; i < Model.ApplicantList.Count; i++)
-    {
+
+@if (@Model.ApplicantList.Count != 0){
+    <h3 class="display-6 text-start" style="padding: 20px 0 10px 0">PENDING ORGANIZER APPLICANTS</h3>
+
+    <table class="table table-dark table-hover">
+        <thead>
         <tr>
-            <th scope="row">@(i+1)</th>
-            <td>@Model.ApplicantList[i].UserName</td>
-            <td>@Model.ApplicantList[i].Email</td>
-            <form method="post">
-            <td><button class="btn btn-sm btn-light">Accept</button></td>
-            </form>
+            <th scope="col">#</th>
+            <th scope="col">Username</th> @*TODO sort onClick*@
+            <th scope="col">Email</th>
+            <th scope="col">Accept</th>
+            
         </tr>
-    }
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.ApplicantList.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i+1)</th>
+                <td>@Model.ApplicantList[i].UserName</td>
+                <td>@Model.ApplicantList[i].Email</td>
+                <form method="post">
+                    <input value="@Model.ApplicantList[i].Id" name="userId" type="hidden" ></input>
+                    <td><button class="btn btn-sm btn-light">Accept</button></td>
+                </form>
+            </tr>
+        }
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}

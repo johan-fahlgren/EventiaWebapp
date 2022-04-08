@@ -1,6 +1,7 @@
 using DataLayer.Model;
 using EventiaWebapp.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EventiaWebapp.Pages.Admin
@@ -31,6 +32,15 @@ namespace EventiaWebapp.Pages.Admin
             UserList = await _adminService.GetUsers();
             ApplicantList = await _adminService.GetApplicants();
 
+        }
+
+        public async Task<IActionResult> OnPost(string userId)
+        {
+
+            await _adminService.SetOrganizerRole(userId);
+
+
+            return RedirectToPage("/Admin/ManageUsers");
         }
     }
 }

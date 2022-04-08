@@ -63,13 +63,34 @@ namespace EventiaWebapp.Services
                 .Where(u => u.Application != null)
                 .ToListAsync();
 
-
             return applicantsList;
-
 
         }
 
 
+        public async Task SetOrganizerRole(string userId)
+        {
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+
+            await _userManager.RemoveFromRoleAsync(user, "user");
+
+            await _userManager.AddToRoleAsync(user, "organizer");
+
+            var ApplicantUser = await _eventiaDbContext.Users
+                .Include(u => u.Application)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            var thisUser = await _eventiaDbContext.RoleApplications
+                .Include(r => r.Applicants)
+                .FirstOrDefaultAsync(r => r.id == ApplicantUser.Application.id);
+
+            _eventiaDbContext.Remove(thisUser);
+            await _eventiaDbContext.SaveChangesAsync();
+
+
+        }
     }
 }
 
