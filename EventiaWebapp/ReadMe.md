@@ -2,17 +2,18 @@
 
 Eventia is a MPA to browse and attend differnet events, built on ASP.NET framework
 and Razor Pages. Implementing the Identity API to manage users and different roles
-for authorization.   
+for authorization.
 
-___
+---
+
 ### Pages
 
 #### Basic
+
 - [x] Welcome page
 - [x] Event Page
 - [x] Login Page
 - [x] Register Page
-
 
 #### User
 
@@ -29,7 +30,6 @@ ___
 - [x] Admin functions
 - [x] Menage users
 
-
 ## Functions:
 
 ### Anynomus
@@ -37,13 +37,12 @@ ___
 - [x] Browse Events
 - [x] Register
 
-
 ### User role
 
 - [x] Login
 - [x] Join Event
 - [x] See Joined Event
-- [ ] Apply for organizer role 
+- [x] Apply for organizer role
 
 #### optional:
 
@@ -64,11 +63,11 @@ ___
 
 ### Administrator role
 
-- [ ] See users List
-- [ ] Change user role to organizer 
+- [x] See users List
+- [x] Change user role to organizer
 
 #### optional:
 
 - [ ] Add search function to userlist
 
-___
+---
