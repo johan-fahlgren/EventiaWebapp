@@ -6,7 +6,7 @@
 
 <div class="d-flex justify-content-center">
     <div class="flex-column">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
         <h2 class="display-5 my-4">Create a new event</h2>
             <hr />
             @*Titel*@
@@ -58,10 +58,12 @@
                 </div>
             </div>
             @*Image*@
-            @*<input class="form-control flex-fill h-100 mb-1" type="file" asp-for="Input.EventImg" placeholder="Event image"/>
-            <p class="mb-4" style="font-size: 0.8rem" >Recommended minimum event image size 600x400px</p>*@
+            <input class="form-control flex-fill h-100 mb-1" type="file" asp-for="Input.EventImg"/>
+            <span asp-validation-for="Input.EventImg"></span>
+            <p class="mb-4" style="font-size: 0.8rem" >Recommended minimum event image size 600x400px</p>
             @*Submit*@
-            <input class="btn btn-dark" type="submit"></input>
+            
+            <button class="btn btn-dark" type="submit">Submit</button>
         </form>
     </div>
 </div>

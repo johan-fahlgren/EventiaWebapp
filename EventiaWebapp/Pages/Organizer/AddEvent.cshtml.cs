@@ -22,7 +22,7 @@ namespace EventiaWebapp.Pages.Organizer
         }
 
 
-        [BindProperty(SupportsGet = true)] //TODO - "SupportGet" necessary?
+        [BindProperty]
         public InputModel Input { get; set; }
 
         public class InputModel
@@ -58,19 +58,17 @@ namespace EventiaWebapp.Pages.Organizer
             [Display(Name = "Spots Available")]
             public int SpotsAvailable { get; set; }
 
-            /* //TODO - upload file and set img url
-            [DataType(DataType.Upload)] 
+            ///TODO - upload file and set img url
+            [DataType(DataType.Upload)]
             [Display(Name = "Event image")]
-            public IFormFile EventImg { get; set; } 
-            */
+            public IFormFile? EventImg { get; set; }
+
 
         }
-
 
         public void OnGet()
         {
         }
-
 
         public async Task<IActionResult> OnPostAsync()
         {

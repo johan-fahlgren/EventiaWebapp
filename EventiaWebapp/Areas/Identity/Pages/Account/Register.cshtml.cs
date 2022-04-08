@@ -86,25 +86,17 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                var isChecked = Input.OrganizerCheckbox;
+                RoleApplication? application = null;
+                if (isChecked) application = new RoleApplication();
 
-                if (Input.OrganizerCheckbox is false) //TODO Can this be less code?
+                NewUser = new EventiaUser()
                 {
-                    NewUser = new EventiaUser()
-                    {
-                        UserName = Input.UserName,
-                        Email = Input.Email,
-                        Application = null
-                    };
-                }
-                else
-                {
-                    NewUser = new EventiaUser()
-                    {
-                        UserName = Input.UserName,
-                        Email = Input.Email,
-                        Application = new RoleApplication()
-                    };
-                }
+                    UserName = Input.UserName,
+                    Email = Input.Email,
+                    Application = application
+
+                };
 
 
 
@@ -135,19 +127,6 @@ namespace EventiaWebapp.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private EventiaUser CreateUser()
-        {
-            try
-            {
-                return Activator.CreateInstance<EventiaUser>();
-            }
-            catch
-            {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(EventiaUser)}'. " +
-                    $"Ensure that '{nameof(EventiaUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
-            }
-        }
 
     }
 }
