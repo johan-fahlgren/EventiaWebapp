@@ -1,4 +1,6 @@
+using DataLayer.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,10 +10,12 @@ namespace EventiaWebapp.Pages.Admin
     public class IndexModel : PageModel
     {
         private readonly DataLayer.Backend.Admin _admin;
+        private readonly SignInManager<EventiaUser> _signInManager;
 
-        public IndexModel(DataLayer.Backend.Admin admin)
+        public IndexModel(DataLayer.Backend.Admin admin, SignInManager<EventiaUser> signInManager)
         {
             _admin = admin;
+            _signInManager = signInManager;
         }
 
         public IActionResult OnGet()
@@ -21,9 +25,9 @@ namespace EventiaWebapp.Pages.Admin
 
         public async Task<IActionResult> OnPost()
         {
-
-            await _admin.RecreateAndSeedTestDatabase(); //TODO - Resetting database reseeds Admin and Cookie persists. site crash :O! 
-            return Page();
+            await _signInManager.SignOutAsync();
+            await _admin.RecreateAndSeedTestDatabase();
+            return RedirectToPage("/index");
         }
     }
 }
