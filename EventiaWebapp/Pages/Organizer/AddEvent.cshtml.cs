@@ -34,7 +34,7 @@ namespace EventiaWebapp.Pages.Organizer
             public string Titel { get; set; }
 
             [Required]
-            [DataType(DataType.MultilineText)] //TODO(done) - won't show as "<textarea>"
+            [DataType(DataType.MultilineText)]
             [Display(Name = "Description")]
             public string Description { get; set; }
 
@@ -62,7 +62,6 @@ namespace EventiaWebapp.Pages.Organizer
             [DataType(DataType.Upload)]
             [Display(Name = "Event image")]
             public IFormFile? EventImg { get; set; }
-
 
         }
 
