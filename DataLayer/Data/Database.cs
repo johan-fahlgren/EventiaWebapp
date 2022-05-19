@@ -213,7 +213,7 @@ namespace DataLayer.Data
                     JoinedEvent = annaMartasEvents,
                     Application = new RoleApplication()
                 }
-    };
+            };
 
 
             foreach (var user in eventiaUser)
